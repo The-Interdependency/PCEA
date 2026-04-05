@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Commitment generation over Shamir share bytes.
 

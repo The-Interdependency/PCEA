@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Key wrapping and unwrapping using AES-256-GCM.
 

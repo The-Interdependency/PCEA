@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for seal_live_state / unseal_live_state round-trips and rekey.
 """

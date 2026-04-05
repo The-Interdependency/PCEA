@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for key wrap / unwrap.
 """

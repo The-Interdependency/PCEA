@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Shamir's Secret Sharing over GF(256).
 

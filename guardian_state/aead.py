@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 AES-256-GCM authenticated encryption / decryption.
 

@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for Shamir's Secret Sharing (GF(256) inline implementation).
 """

@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 HKDF-SHA256 key derivation and per-seal nonce derivation.
 
