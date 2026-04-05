@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 guardian_state — Guardian cryptographic state library.
 

@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Rekey epoch: produce a new epoch from old Guardian state.
 

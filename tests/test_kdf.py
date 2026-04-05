@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for HKDF key derivation and nonce derivation.
 """

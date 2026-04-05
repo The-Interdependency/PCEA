@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """
 Deterministic encoding for AAD construction and commitment inputs.
 
