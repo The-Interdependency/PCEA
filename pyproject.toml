@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "guardian-state"
+version = "0.1.0"
+description = "Guardian cryptographic state library for a0 and related runtimes"
+requires-python = ">=3.11"
+dependencies = [
+    "cryptography>=42.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["guardian_state"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
