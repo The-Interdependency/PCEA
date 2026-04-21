@@ -2,50 +2,63 @@
 """
 Stateful PCEA instance.
 
-PCEAInstance tracks last_state automatically, advancing it after each
-encrypt or decrypt call so that sender and receiver stay synchronized
-without manual state management.
+PCEAInstance tracks last_state (a list of seeds) automatically. After each
+encrypt or decrypt call, last_state advances to the current plaintext seeds
+so that sender and receiver stay synchronized without manual state management.
+
+Each seed is a 7×7 structure: 7 circles × 7 tensors. Each circle is itself
+a tensor; each seed is itself a tensor.
 """
 from __future__ import annotations
 
+import copy
+
 from .cipher import decrypt_state, encrypt_state
+
+Seed = list[list[int]]
+State = list[Seed]
+
+
+def _zero_seed() -> Seed:
+    return [[0] * 7 for _ in range(7)]
 
 
 class PCEAInstance:
     """
     Stateful prime-circular encryption session.
 
-    The instance maintains last_state internally. After each encrypt call,
-    last_state advances to the current plaintext state. The receiver's
-    decrypt call mirrors this: last_state advances to the recovered plaintext.
-
-    Both sender and receiver must be initialized with the same seed and
+    Maintains last_state (list of seeds) internally. After each encrypt call
+    last_state advances to the plaintext seeds. The receiver's decrypt call
+    mirrors this. Both sides must be initialized with the same seed and
     process states in the same order.
 
     Args:
-        seed: initial last_state; must be a non-empty integer sequence.
+        seed: initial last_state as a list of seeds (each 7×7). Must be
+              non-empty. Pass a single 7×7 seed or a list of them.
     """
 
-    def __init__(self, seed: list[int]) -> None:
+    def __init__(self, seed: State) -> None:
         if not seed:
             raise ValueError("seed must be non-empty")
-        self._last: list[int] = list(seed)
+        if isinstance(seed[0][0], int):
+            raise ValueError("seed must be a list of 7×7 seeds (list[list[list[int]]])")
+        self._last: State = copy.deepcopy(seed)
 
-    def encrypt(self, state: list[int]) -> list[int]:
+    def encrypt(self, state: State) -> State:
         """Encrypt state and advance internal last_state to state."""
         encrypted = encrypt_state(state, self._last)
         if state:
-            self._last = list(state)
+            self._last = copy.deepcopy(state)
         return encrypted
 
-    def decrypt(self, encrypted: list[int]) -> list[int]:
+    def decrypt(self, encrypted: State) -> State:
         """Decrypt encrypted state and advance internal last_state to recovered state."""
         state = decrypt_state(encrypted, self._last)
         if state:
-            self._last = list(state)
+            self._last = copy.deepcopy(state)
         return state
 
     @property
-    def last_state(self) -> list[int]:
+    def last_state(self) -> State:
         """Read-only snapshot of the current last_state."""
-        return list(self._last)
+        return copy.deepcopy(self._last)

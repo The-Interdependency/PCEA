@@ -2,34 +2,48 @@
 """
 Hash-based key derivation for PCEA.
 
-Derives a deterministic stream of key digits from (last_val, position) using
-SHA-256. Each call yields 32 bytes; a counter extends the stream as needed.
-This eliminates the key exhaustion and zero-passthrough weaknesses of direct
-base-p decomposition of last_state values.
+Key stream is derived from the hierarchical address (seed, circle, tensor)
+and the values at that position plus its heptagram neighbors in the circle
+dimension (±3 mod 7, the PTCA adjacency rule). This means each tensor's
+encryption depends on its own last_state value AND the last_state of the
+two circles it interlocks with — implementing the circular interlocking
+property of the seven-disk structure.
 """
 from __future__ import annotations
 
 import hashlib
 
 
-def key_stream(last_val: int, position: int, length: int, p: int) -> list[int]:
+def key_stream(
+    contributors: list[int],
+    seed_idx: int,
+    circle_idx: int,
+    tensor_idx: int,
+    length: int,
+    p: int,
+) -> list[int]:
     """
-    Derive `length` key digits in [0, p-1] from (last_val, position) via SHA-256.
+    Derive `length` key digits in [0, p-1] via SHA-256.
 
     Args:
-        last_val: last_state element used as key source.
-        position: element index in state; mixes into the hash so identical
-                  last_val values at different positions yield different keys.
-        length: number of key digits needed.
-        p: prime base; digits are reduced mod p.
+        contributors: [own_val, left_neighbor_val, right_neighbor_val] —
+                      the last_state values at (circle_idx, tensor_idx),
+                      ((circle_idx - 3) % 7, tensor_idx), and
+                      ((circle_idx + 3) % 7, tensor_idx).
+        seed_idx:     index of the seed in the architecture.
+        circle_idx:   index of the circle within the seed (0..6).
+        tensor_idx:   index of the tensor within the circle (0..6).
+        length:       number of key digits to produce.
+        p:            prime base; digits are reduced mod p.
 
     Returns:
         List of `length` integers, each in [0, p-1].
     """
+    contrib_str = ":".join(str(c) for c in contributors)
     raw = bytearray()
     counter = 0
     while len(raw) < length:
-        payload = f"{last_val}:{position}:{counter}".encode()
+        payload = f"{contrib_str}:{seed_idx}:{circle_idx}:{tensor_idx}:{counter}".encode()
         raw.extend(hashlib.sha256(payload).digest())
         counter += 1
     return [b % p for b in raw[:length]]
