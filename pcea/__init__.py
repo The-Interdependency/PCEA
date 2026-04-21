@@ -25,12 +25,14 @@ Constants:
 
 from .cipher import decrypt_state, encrypt_state
 from .instance import PCEAInstance
+from .kdf import key_stream
 from .primes import CIRCLE_SIZE, PRIME_CIRCLE, prime_at
 
 __all__ = [
     "encrypt_state",
     "decrypt_state",
     "PCEAInstance",
+    "key_stream",
     "PRIME_CIRCLE",
     "CIRCLE_SIZE",
     "prime_at",
