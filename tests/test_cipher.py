@@ -75,11 +75,13 @@ def test_empty_state():
     assert decrypt_state([], [1]) == []
 
 
-def test_zero_key_is_identity():
-    # key_digits of 0 are all zeros → shift is zero → encrypted == original
+def test_zero_last_state_still_encrypts():
+    # hash(0, position) is nonzero → last_state zeros still produce a key
     state = [1, 2, 3, 4, 5]
     last = [0, 0, 0, 0, 0]
-    assert encrypt_state(state, last) == state
+    encrypted = encrypt_state(state, last)
+    assert encrypted != state
+    assert decrypt_state(encrypted, last) == state
 
 
 def test_roundtrip_long_state():

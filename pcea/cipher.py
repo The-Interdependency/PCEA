@@ -4,8 +4,8 @@ Prime-circular base number cipher.
 
 For each index i, the prime p = prime_at(i) is the number base.
 state[i] is decomposed into bijective base-p digits (each in {1, ..., p}).
-Each digit is additively shifted by the corresponding digit of
-last_state[i % L] in standard base p, then wrapped within {1, ..., p}:
+Each digit is additively shifted by a key digit derived from
+last_state[i % L] via SHA-256 (see kdf.key_stream), then wrapped within {1, ..., p}:
 
     Encrypt: e_j = ((v_j - 1 + k_j) mod p) + 1
     Decrypt: v_j = ((e_j - 1 - k_j) mod p) + 1
@@ -15,7 +15,8 @@ source cycles with period L = len(last_state).
 """
 from __future__ import annotations
 
-from .codec import from_bijective, key_digits, to_bijective
+from .codec import from_bijective, to_bijective
+from .kdf import key_stream
 from .primes import prime_at
 
 
@@ -25,7 +26,7 @@ def _encrypt_element(value: int, position: int, key: int) -> int:
     p = prime_at(position)
     sign = -1 if value < 0 else 1
     v_digits = to_bijective(abs(value), p)
-    k_digits = key_digits(key, len(v_digits), p)
+    k_digits = key_stream(key, position, len(v_digits), p)
     e_digits = [((vd - 1 + kd) % p) + 1 for vd, kd in zip(v_digits, k_digits)]
     return sign * from_bijective(e_digits, p)
 
@@ -36,7 +37,7 @@ def _decrypt_element(encrypted: int, position: int, key: int) -> int:
     p = prime_at(position)
     sign = -1 if encrypted < 0 else 1
     e_digits = to_bijective(abs(encrypted), p)
-    k_digits = key_digits(key, len(e_digits), p)
+    k_digits = key_stream(key, position, len(e_digits), p)
     v_digits = [((ed - 1 - kd) % p) + 1 for ed, kd in zip(e_digits, k_digits)]
     return sign * from_bijective(v_digits, p)
 
