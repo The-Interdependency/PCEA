@@ -56,6 +56,18 @@ def test_flat_seed_raises():
         PCEAInstance([[1, 2, 3]])
 
 
+def test_malformed_seed_raises():
+    # Wrong number of circles
+    with pytest.raises(ValueError):
+        PCEAInstance([[[1] * 7] * 3])
+
+def test_malformed_circle_raises():
+    # Wrong number of tensors per circle
+    bad = [[[1] * 3 for _ in range(7)]]
+    with pytest.raises(ValueError):
+        PCEAInstance(bad)
+
+
 def test_last_state_advances_after_encrypt():
     init = _state(1, 10)
     inst = PCEAInstance(init)

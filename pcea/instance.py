@@ -33,15 +33,17 @@ class PCEAInstance:
     process states in the same order.
 
     Args:
-        seed: initial last_state as a list of seeds (each 7×7). Must be
-              non-empty. Pass a single 7×7 seed or a list of them.
+        seed: initial last_state as a non-empty list of 7×7 seeds
+              (list[list[list[int]]]).
     """
 
     def __init__(self, seed: State) -> None:
         if not seed:
             raise ValueError("seed must be non-empty")
-        if isinstance(seed[0][0], int):
-            raise ValueError("seed must be a list of 7×7 seeds (list[list[list[int]]])")
+        for i, s in enumerate(seed):
+            if (not isinstance(s, list) or len(s) != 7
+                    or any(not isinstance(row, list) or len(row) != 7 for row in s)):
+                raise ValueError(f"seed[{i}] must be a 7×7 list of integers")
         self._last: State = copy.deepcopy(seed)
 
     def encrypt(self, state: State) -> State:
