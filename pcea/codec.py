@@ -1,49 +1,65 @@
 # GPT/Claude generated; context, prompt Erin Spencer
 """
-Bijective prime-base codec for PCEA.
+Möbius disk codec for PCEA.
 
-Bijective base-p encoding represents each positive integer with digits in
-{1, ..., p}. Unlike standard base-p, there are no leading zeros, so every
-positive integer has a unique representation of exactly ceil(log_p(n))
-digits. This guarantees that encrypted values always have the same digit
-count as the originals, making decryption unambiguous.
+Values are mapped to positions on a Möbius disk before encryption:
+- mobius_encode: signed integer → unsigned position in {0..2^W - 1}
+- mobius_decode: unsigned position → signed integer
 
-    to_bijective(n, p)        -> digits (little-endian, each in 1..p)
-    from_bijective(digits, p) -> positive integer
-    key_digits(key, n, p)     -> n digits of abs(key) in standard base p (0..p-1)
+The two sides of the disk are the two two's-complement halves. Positive
+values sit in the lower half, negative values wrap to the upper half via
+Python's natural modular arithmetic. An observer sees only the encrypted
+position — the side (sign) is invisible without the key.
+
+Fixed-width base-p encoding ensures the encrypted output always has exactly
+k = digit_count(p, word_bits) digits, so the magnitude of the original
+value does not leak through output length.
+
+    mobius_encode(v, word_bits)   -> u in {0..2^W - 1}
+    mobius_decode(u, word_bits)   -> v (signed)
+    digit_count(p, word_bits)     -> k (fixed digit count for prime p)
+    to_fixed(u, p, k)             -> k digits in {0..p-1}, little-endian
+    from_fixed(digits, p)         -> unsigned integer
 """
 from __future__ import annotations
 
 
-def to_bijective(n: int, p: int) -> list[int]:
-    """Decompose positive integer n into bijective base-p digits, little-endian."""
-    if n <= 0:
-        return []
+def mobius_encode(v: int, word_bits: int) -> int:
+    """Map signed integer v to unsigned position on the Möbius disk."""
+    mask = (1 << word_bits) - 1
+    return v & mask
+
+
+def mobius_decode(u: int, word_bits: int) -> int:
+    """Map unsigned Möbius disk position back to signed integer."""
+    half = 1 << (word_bits - 1)
+    return u if u < half else u - (1 << word_bits)
+
+
+def digit_count(p: int, word_bits: int) -> int:
+    """Fixed number of base-p digits needed to cover the full Möbius disk (2^word_bits positions)."""
+    k = 0
+    capacity = 1
+    while capacity < (1 << word_bits):
+        capacity *= p
+        k += 1
+    return k
+
+
+def to_fixed(u: int, p: int, k: int) -> list[int]:
+    """Encode unsigned integer u as exactly k standard base-p digits, little-endian."""
     digits: list[int] = []
-    while n > 0:
-        d = n % p
-        if d == 0:
-            d = p
-        digits.append(d)
-        n = (n - d) // p
+    for _ in range(k):
+        digits.append(u % p)
+        u //= p
     return digits
 
 
-def from_bijective(digits: list[int], p: int) -> int:
-    """Reconstruct positive integer from bijective base-p digits, little-endian."""
+def from_fixed(digits: list[int], p: int) -> int:
+    """Reconstruct unsigned integer from standard base-p digits, little-endian."""
     result = 0
     power = 1
     for d in digits:
         result += d * power
         power *= p
     return result
-
-
-def key_digits(key: int, length: int, p: int) -> list[int]:
-    """Extract `length` digits of abs(key) in standard base p (0..p-1), little-endian."""
-    k = abs(key)
-    out: list[int] = []
-    for _ in range(length):
-        out.append(k % p)
-        k //= p
-    return out
