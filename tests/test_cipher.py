@@ -102,6 +102,26 @@ def test_encrypt_state_roundtrip():
     assert decrypt_state(encrypt_state(state, last), last) == state
 
 
+def test_encrypt_seed_wrong_shape_raises():
+    import pytest
+    bad = [[1, 2, 3]]
+    good = _seed()
+    with pytest.raises(ValueError):
+        encrypt_seed(bad, good)
+    with pytest.raises(ValueError):
+        encrypt_seed(good, bad)
+
+
+def test_encrypt_state_length_mismatch_raises():
+    import pytest
+    state = [_seed(10), _seed(20)]
+    last = [_seed(1)]
+    with pytest.raises(ValueError):
+        encrypt_state(state, last)
+    with pytest.raises(ValueError):
+        decrypt_state(state, last)
+
+
 def test_encrypt_state_seed_idx_varies():
     state = [_seed(10), _seed(10)]
     last = [_seed(5), _seed(5)]

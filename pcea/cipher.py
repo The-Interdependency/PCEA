@@ -26,6 +26,11 @@ CIRCLE_COUNT = 7
 TENSOR_COUNT = 7
 
 
+def _validate_seed(s: list[list[int]], name: str) -> None:
+    if len(s) != CIRCLE_COUNT or any(len(row) != TENSOR_COUNT for row in s):
+        raise ValueError(f"{name} must be a {CIRCLE_COUNT}×{TENSOR_COUNT} integer array")
+
+
 def _contributors(last_seed: list[list[int]], circle_idx: int, tensor_idx: int) -> list[int]:
     """Own value plus heptagram neighbors (±3 mod 7)."""
     return [
@@ -85,6 +90,8 @@ def encrypt_seed(
     Returns:
         Encrypted seed as a 7×7 integer array.
     """
+    _validate_seed(seed, "seed")
+    _validate_seed(last_seed, "last_seed")
     return [
         [
             _encrypt_element(seed[c][t], seed_idx, c, t, last_seed)
@@ -110,6 +117,8 @@ def decrypt_seed(
     Returns:
         Recovered seed as a 7×7 integer array.
     """
+    _validate_seed(encrypted, "encrypted")
+    _validate_seed(last_seed, "last_seed")
     return [
         [
             _decrypt_element(encrypted[c][t], seed_idx, c, t, last_seed)
@@ -121,9 +130,17 @@ def decrypt_seed(
 
 def encrypt_state(state: list[list[list[int]]], last_state: list[list[list[int]]]) -> list[list[list[int]]]:
     """Encrypt a full architecture state: list of seeds."""
+    if not state:
+        return []
+    if len(state) != len(last_state):
+        raise ValueError("state and last_state must contain the same number of seeds")
     return [encrypt_seed(state[i], last_state[i], i) for i in range(len(state))]
 
 
 def decrypt_state(encrypted: list[list[list[int]]], last_state: list[list[list[int]]]) -> list[list[list[int]]]:
     """Decrypt a full architecture state: list of seeds."""
+    if not encrypted:
+        return []
+    if len(encrypted) != len(last_state):
+        raise ValueError("encrypted and last_state must contain the same number of seeds")
     return [decrypt_seed(encrypted[i], last_state[i], i) for i in range(len(encrypted))]
