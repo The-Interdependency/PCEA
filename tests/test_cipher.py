@@ -33,13 +33,14 @@ def test_encrypt_changes_nonzero_values():
     assert encrypt_seed(seed, last) != seed
 
 
-def test_zero_elements_stay_zero():
+def test_zero_elements_are_encrypted():
+    # Zero values are encrypted like any other value on the Möbius disk — they
+    # do not stay zero (that would leak which positions are zero).
     seed = _zero_seed()
     last = _seed(99)
     encrypted = encrypt_seed(seed, last)
-    for c in range(CIRCLES):
-        for t in range(TENSORS):
-            assert encrypted[c][t] == 0
+    assert encrypted != seed
+    assert decrypt_seed(encrypted, last) == seed
 
 
 def test_roundtrip_negative_values():

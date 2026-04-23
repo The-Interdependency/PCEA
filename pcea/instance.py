@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import copy
 
-from .cipher import decrypt_state, encrypt_state
+from .cipher import DEFAULT_WORD_BITS, decrypt_state, encrypt_state
 
 Seed = list[list[int]]
 State = list[Seed]
@@ -33,11 +33,13 @@ class PCEAInstance:
     process states in the same order.
 
     Args:
-        seed: initial last_state as a non-empty list of 7×7 seeds
-              (list[list[list[int]]]).
+        seed:      initial last_state as a non-empty list of 7×7 seeds
+                   (list[list[list[int]]]).
+        word_bits: Möbius disk size in bits. Must match between sender and
+                   receiver. Default 64; set higher for larger value ranges.
     """
 
-    def __init__(self, seed: State) -> None:
+    def __init__(self, seed: State, word_bits: int = DEFAULT_WORD_BITS) -> None:
         if not seed:
             raise ValueError("seed must be non-empty")
         for i, s in enumerate(seed):
@@ -45,17 +47,18 @@ class PCEAInstance:
                     or any(not isinstance(row, list) or len(row) != 7 for row in s)):
                 raise ValueError(f"seed[{i}] must be a 7×7 list of integers")
         self._last: State = copy.deepcopy(seed)
+        self._word_bits = word_bits
 
     def encrypt(self, state: State) -> State:
         """Encrypt state and advance internal last_state to state."""
-        encrypted = encrypt_state(state, self._last)
+        encrypted = encrypt_state(state, self._last, self._word_bits)
         if state:
             self._last = copy.deepcopy(state)
         return encrypted
 
     def decrypt(self, encrypted: State) -> State:
         """Decrypt encrypted state and advance internal last_state to recovered state."""
-        state = decrypt_state(encrypted, self._last)
+        state = decrypt_state(encrypted, self._last, self._word_bits)
         if state:
             self._last = copy.deepcopy(state)
         return state
