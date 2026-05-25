@@ -47,6 +47,7 @@ from .cipher import (
     encrypt_state,
 )
 from .codec import digit_count, from_fixed, mobius_decode, mobius_encode, to_fixed
+from .contract import DECISION as CONTRACT_DECISION, contract_statement
 from .instance import PCEAInstance
 from .kdf import key_stream
 from .primes import CIRCLE_SIZE, PRIME_CIRCLE, prime_at
@@ -73,4 +74,7 @@ __all__ = [
     "PRIME_CIRCLE",
     "CIRCLE_SIZE",
     "prime_at",
+    "CONTRACT_DECISION",
+    "contract_statement",
 ]
+

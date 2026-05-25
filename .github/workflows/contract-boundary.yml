@@ -1,0 +1,21 @@
+name: contract-boundary
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  boundary:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run contract boundary tests
+        run: |
+          PYTHONPATH=. python -m pytest -q tests/test_contract_spec.py
