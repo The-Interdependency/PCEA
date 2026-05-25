@@ -47,6 +47,23 @@ assert dec.decrypt(e1) == [100, 200, 300]
 assert dec.decrypt(e2) == [400, 500, 600]
 ```
 
+
+## PCEA ↔ UCNS Boundary (v0 contract decision)
+
+PCEA is specified to decrypt/invert **via keys**, not via UCNS inverse operations.
+That means:
+
+- PCEA consumes only forward arithmetic substrate behavior.
+- Security rests on key management (`last_state` synchronization and protection), not on any assumption that arithmetic inversion is hard.
+- A mismatch in key state must fail recovery by design.
+
+This keeps PCEA cryptographic claims decoupled from UCNS analytic-frontier work.
+
+Enforcement:
+
+- `tests/test_contract_spec.py` is a release gate for this boundary.
+- `.github/workflows/contract-boundary.yml` runs this gate in CI for pull requests and pushes to `main`.
+
 ## Install
 
 ```
