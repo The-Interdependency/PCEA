@@ -59,6 +59,11 @@ That means:
 
 This keeps PCEA cryptographic claims decoupled from UCNS analytic-frontier work.
 
+Enforcement:
+
+- `tests/test_contract_spec.py` is a release gate for this boundary.
+- `.github/workflows/contract-boundary.yml` runs this gate in CI for pull requests and pushes to `main`.
+
 ## Install
 
 ```

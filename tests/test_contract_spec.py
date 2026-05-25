@@ -3,11 +3,12 @@
 These tests codify the v0 decision-forcing contract in executable form for PCEA:
 - PCEA inversion/decryption is key-derived (from last_state), not UCNS inverse APIs.
 - Security must not rely on arithmetic non-invertibility.
-- The package must not import UCNS or catalogue-dependent inverse operations.
+- The package must not import or call catalogue-dependent inverse operations.
 """
 
 from __future__ import annotations
 
+import ast
 import pathlib
 
 import pytest
@@ -17,12 +18,33 @@ from pcea import decrypt_state, encrypt_state
 
 CIRCLES = 7
 TENSORS = 7
-
+RUNTIME_FILES = [
+    pathlib.Path("pcea/__init__.py"),
+    pathlib.Path("pcea/cipher.py"),
+    pathlib.Path("pcea/instance.py"),
+    pathlib.Path("pcea/kdf.py"),
+    pathlib.Path("pcea/codec.py"),
+    pathlib.Path("pcea/primes.py"),
+]
+FORBIDDEN_NAMES = {
+    "ucns",
+    "left_quotient",
+    "right_quotient",
+    "left_quotient_payload",
+    "factor_search_v06",
+    "factor_search",
+    "is_seq_composite",
+    "catalogue",
+}
 
 
 def _seed(base: int = 1) -> list[list[int]]:
     return [[(base + c * TENSORS + t) for t in range(TENSORS)] for c in range(CIRCLES)]
 
+
+def _module_tree(file_path: pathlib.Path) -> ast.AST:
+    source = file_path.read_text(encoding="utf-8")
+    return ast.parse(source, filename=str(file_path))
 
 
 def test_decrypt_requires_matching_key_state() -> None:
@@ -37,29 +59,35 @@ def test_decrypt_requires_matching_key_state() -> None:
     assert recovered_wrong != state
 
 
-
-def test_no_ucns_dependency_in_runtime_modules() -> None:
-    """PCEA runtime code should remain independent from UCNS inverse buckets."""
-    runtime_files = [
-        pathlib.Path("pcea/__init__.py"),
-        pathlib.Path("pcea/cipher.py"),
-        pathlib.Path("pcea/instance.py"),
-        pathlib.Path("pcea/kdf.py"),
-        pathlib.Path("pcea/codec.py"),
-        pathlib.Path("pcea/primes.py"),
-    ]
-    forbidden_tokens = {
-        "ucns",
-        "left_quotient",
-        "right_quotient",
-        "factor_search",
-        "catalogue",
-    }
-
-    for file in runtime_files:
-        text = file.read_text(encoding="utf-8").lower()
-        for token in forbidden_tokens:
-            assert token not in text, f"Forbidden token '{token}' found in {file}"
+def test_runtime_has_no_forbidden_imports_or_calls() -> None:
+    """Release-blocking guardrail: no UCNS inverse/catalogue symbols in runtime code."""
+    for file in RUNTIME_FILES:
+        tree = _module_tree(file)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    imported = alias.name.lower().split(".")[0]
+                    assert imported not in FORBIDDEN_NAMES, (
+                        f"Forbidden import '{alias.name}' found in {file}"
+                    )
+            elif isinstance(node, ast.ImportFrom):
+                module = (node.module or "").lower().split(".")[0]
+                assert module not in FORBIDDEN_NAMES, (
+                    f"Forbidden module import-from '{node.module}' found in {file}"
+                )
+                for alias in node.names:
+                    assert alias.name.lower() not in FORBIDDEN_NAMES, (
+                        f"Forbidden symbol import '{alias.name}' found in {file}"
+                    )
+            elif isinstance(node, ast.Call):
+                if isinstance(node.func, ast.Name):
+                    assert node.func.id.lower() not in FORBIDDEN_NAMES, (
+                        f"Forbidden function call '{node.func.id}' found in {file}"
+                    )
+                elif isinstance(node.func, ast.Attribute):
+                    assert node.func.attr.lower() not in FORBIDDEN_NAMES, (
+                        f"Forbidden method call '{node.func.attr}' found in {file}"
+                    )
 
 
 @pytest.mark.parametrize("word_bits", [32, 64, 128])
