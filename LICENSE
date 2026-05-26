@@ -1,0 +1,33 @@
+================================================================================
+INTERIM LICENSE NOTICE  —  ACTION REQUIRED BEFORE MERGE / PUBLIC RELEASE
+================================================================================
+
+This work is being relicensed and will be offered under a DUAL LICENSE:
+
+  1. GNU Affero General Public License, version 3 or later
+     SPDX-License-Identifier: AGPL-3.0-or-later
+     Canonical text: https://www.gnu.org/licenses/agpl-3.0.txt
+
+  2. A separate COMMERCIAL LICENSE for parties who do not wish to comply
+     with the copyleft obligations of the AGPL. See LICENSE-COMMERCIAL.md.
+
+Copyright (c) 2026 Erin Patrick Spencer. All rights reserved.
+
+--------------------------------------------------------------------------------
+STATUS — FULL TEXT NOT YET INSERTED
+
+The full verbatim AGPL-3.0 legal text has NOT been pasted into this file. The
+automated environment that produced this branch had no outbound network access
+and could not retrieve the canonical text.
+
+Before this branch is merged or the work is released publicly, replace the
+marker line below with the complete, unmodified text published at:
+
+    https://www.gnu.org/licenses/agpl-3.0.txt
+
+This notice records the licensor's present intent to license the work under
+AGPL-3.0-or-later. Until the full text is inserted, the canonical published
+version at the URL above governs in all respects.
+--------------------------------------------------------------------------------
+
+>>> INSERT FULL VERBATIM AGPL-3.0 TEXT HERE <<<
