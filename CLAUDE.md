@@ -12,7 +12,7 @@ Primary use case: encrypting neural architecture state (pre-quantized integer te
 
 **Python requirement:** ≥ 3.9  
 **External dependencies:** none (stdlib only — math, dataclasses)  
-**License:** Apache 2.0
+**License:** AGPL-3.0-or-later (dual-licensed commercial option)
 
 ---
 
@@ -48,7 +48,7 @@ pcea/
 tests/
   test_*.py       pytest test suite
 
-pyproject.toml    Package config (setuptools, Apache-2.0, Python >= 3.9)
+pyproject.toml    Package config (setuptools, AGPL-3.0-or-later, Python >= 3.9)
 README.md
 LICENSE
 ```
@@ -134,7 +134,7 @@ assert dec.decrypt(e2) == [400, 500, 600]
 - Feature branches: `feat/<description>`, `fix/<description>`, `docs/<description>`
 - Commit style: Conventional Commits (`feat(pcea):`, `fix(cipher):`, etc.)
 - Author: Erin Patrick Spencer (wayseer@interdependentway.org)
-- License: Apache 2.0
+- License: AGPL-3.0-or-later (dual-licensed commercial option)
 
 ## Agent module-build doctrine
 
