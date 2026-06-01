@@ -71,6 +71,11 @@ pip install .          # runtime — no dependencies
 pip install ".[dev]"   # adds pytest
 ```
 
+## License
+
+Dual-licensed: **AGPL-3.0-or-later** (default open source) or a separate
+commercial license. See `LICENSE` and `LICENSE-COMMERCIAL.md`.
+
 ## Author
 
 Erin Patrick Spencer — interdependentway.org
