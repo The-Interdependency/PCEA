@@ -22,7 +22,7 @@ Key: SHA-256(own + heptagram neighbors ±3, seed_idx, circle_idx, tensor_idx)
 #   module_kind: engine
 #   summary: prime-circular Mobius disk cipher: fixed-width base-p digit encode with SHA-256 keyed additive shift
 #   owner: Erin Spencer
-#   public_surface: encrypt_seed, decrypt_seed, encrypt_state, decrypt_state
+#   public_surface: encrypt_seed, decrypt_seed, encrypt_state, decrypt_state, CIRCLE_COUNT, TENSOR_COUNT, DEFAULT_WORD_BITS
 #   internal_surface: _validate_seed, _contributors, _encrypt_element, _decrypt_element
 #   auth_boundary: none
 #   storage_boundary: none

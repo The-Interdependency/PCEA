@@ -11,14 +11,14 @@ one source of truth.
 #   module_kind: schema
 #   summary: PCEA<->UCNS interface-contract constants and guardrails (single source of truth)
 #   owner: Erin Spencer
-#   public_surface: DECISION, SECURITY_INVARIANT, contract_statement
+#   public_surface: DECISION, SECURITY_INVARIANT, FORBIDDEN_UCNS_SYMBOLS, RUNTIME_MODULES, contract_statement
 #   internal_surface: none
 #   auth_boundary: none
 #   storage_boundary: none
 #   network_boundary: none
 #   user_data_boundary: none
 #   admin_only: false
-#   tests: hmmm
+#   tests: tests.test_contract_spec
 #   rollout: default_enabled
 #   rollback: remove module and its references
 #   requires: none
