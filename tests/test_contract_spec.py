@@ -1,3 +1,4 @@
+# GPT/Claude generated; context, prompt Erin Spencer
 """Contract-level tests for the PCEA↔UCNS boundary assumptions.
 
 These tests codify the v0 decision-forcing contract in executable form for PCEA:
@@ -25,24 +26,6 @@ from pcea.contract import (
 
 CIRCLES = 7
 TENSORS = 7
-RUNTIME_FILES = [
-    pathlib.Path("pcea/__init__.py"),
-    pathlib.Path("pcea/cipher.py"),
-    pathlib.Path("pcea/instance.py"),
-    pathlib.Path("pcea/kdf.py"),
-    pathlib.Path("pcea/codec.py"),
-    pathlib.Path("pcea/primes.py"),
-]
-FORBIDDEN_NAMES = {
-    "ucns",
-    "left_quotient",
-    "right_quotient",
-    "left_quotient_payload",
-    "factor_search_v06",
-    "factor_search",
-    "is_seq_composite",
-    "catalogue",
-}
 
 
 def _seed(base: int = 1) -> list[list[int]]:
@@ -85,7 +68,6 @@ def test_decrypt_requires_matching_key_state() -> None:
 
 def test_runtime_has_no_forbidden_imports_or_calls() -> None:
     """Release-blocking guardrail: no UCNS inverse/catalogue symbols in runtime code."""
-    for file in RUNTIME_FILES:
     for relative_path in RUNTIME_MODULES:
         file = pathlib.Path(relative_path)
         tree = _module_tree(file)
@@ -93,17 +75,11 @@ def test_runtime_has_no_forbidden_imports_or_calls() -> None:
             if isinstance(node, ast.Import):
                 for alias in node.names:
                     imported = alias.name.lower().split(".")[0]
-                    assert imported not in FORBIDDEN_NAMES, (
                     assert imported not in FORBIDDEN_UCNS_SYMBOLS, (
                         f"Forbidden import '{alias.name}' found in {file}"
                     )
             elif isinstance(node, ast.ImportFrom):
                 module = (node.module or "").lower().split(".")[0]
-                assert module not in FORBIDDEN_NAMES, (
-                    f"Forbidden module import-from '{node.module}' found in {file}"
-                )
-                for alias in node.names:
-                    assert alias.name.lower() not in FORBIDDEN_NAMES, (
                 assert module not in FORBIDDEN_UCNS_SYMBOLS, (
                     f"Forbidden module import-from '{node.module}' found in {file}"
                 )
@@ -113,11 +89,6 @@ def test_runtime_has_no_forbidden_imports_or_calls() -> None:
                     )
             elif isinstance(node, ast.Call):
                 if isinstance(node.func, ast.Name):
-                    assert node.func.id.lower() not in FORBIDDEN_NAMES, (
-                        f"Forbidden function call '{node.func.id}' found in {file}"
-                    )
-                elif isinstance(node.func, ast.Attribute):
-                    assert node.func.attr.lower() not in FORBIDDEN_NAMES, (
                     assert node.func.id.lower() not in FORBIDDEN_UCNS_SYMBOLS, (
                         f"Forbidden function call '{node.func.id}' found in {file}"
                     )
