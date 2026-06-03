@@ -185,8 +185,8 @@ assert dec.decrypt(e1) == [seed(99)]
   metadata header. As a result a plain `pytest` aborts during collection (the bad
   file interrupts the whole run).
 - **Excluding the file does NOT make the suite green.** Running
-  `pytest --ignore=tests/test_contract_spec.py` lets the other modules collect
-  (~64 tests), but `tests/test_metadata_headers.py` still fails: it globs
+  `pytest --ignore=tests/test_contract_spec.py` lets the other modules collect,
+  but `tests/test_metadata_headers.py` still fails: it globs
   `pcea/*.py` and `tests/*.py` on disk, and `tests/test_contract_spec.py` is
   still present without the required header line. So the exclusion run reports
   one failure (the metadata-header test) with the rest passing — not a clean
