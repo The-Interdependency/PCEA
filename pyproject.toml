@@ -7,7 +7,7 @@ name = "pcea"
 version = "0.1.0"
 description = "Prime Circular Encryption Algorithm — neural architecture state encryption"
 authors = [
-  { name = "Erin Patrick Spencer", email = "wayseer@interdependentway.org" }
+  { name = "Erin Patrick Spencer", email = "wayseer@interdependentway.org" },
 ]
 license = { text = "AGPL-3.0-or-later" }
 requires-python = ">=3.9"

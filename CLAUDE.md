@@ -17,6 +17,31 @@ state. Framework-agnostic — callers pre-quantize their framework's weight or
 activation tensors into integer arrays. One of the four-letter-acronym libraries
 published under The Interdependency.
 
+<!-- BEGIN GENERATED:manifest -->
+<!-- Generated from pyproject + repo tree by .agents/skills/manifest/generate.py — DO NOT EDIT BY HAND. Refresh with `python .agents/skills/manifest/generate.py --write`. -->
+
+| Field | Value |
+|---|---|
+| Package | `pcea` |
+| Version | `0.1.0` |
+| Description | Prime Circular Encryption Algorithm — neural architecture state encryption |
+| Status | hmmm |
+| Python | >=3.9 |
+| License | AGPL-3.0-or-later |
+| Build backend | `setuptools.build_meta` |
+| Author(s) | Erin Patrick Spencer <wayseer@interdependentway.org> |
+| Repository | https://github.com/The-Interdependency/PCEA |
+| Runtime dependencies | none (stdlib only) |
+| Optional extras | `dev` |
+| Keywords | none |
+| CI workflows | `contract-boundary.yml`, `manifest-check.yml` |
+| Top-level directories | `benchmarks/` · `pcea/` · `tests/` |
+
+<sub>Derived from `pyproject.toml` + the repo tree. Unknown fields surface as `hmmm` rather than a guess.</sub>
+<!-- END GENERATED:manifest -->
+
+> The block above is generated from `pyproject.toml` + the repo tree by the `manifest` living-spec tool (`.agents/skills/manifest/`) and gated in CI (`.github/workflows/manifest-check.yml`) — do not hand-edit between the markers; run `python .agents/skills/manifest/generate.py --write` after changing version/deps/layout.
+
 **Python requirement:** ≥ 3.9 (CI matrix: 3.9, 3.11, 3.13)
 **External dependencies:** none at runtime (stdlib only — `hashlib`, `copy`); `pytest` for dev
 **License:** AGPL-3.0-or-later (dual-licensed commercial option)
