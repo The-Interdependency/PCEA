@@ -182,10 +182,19 @@ assert dec.decrypt(e1) == [seed(99)]
 - **`tests/test_contract_spec.py` is currently broken** — it contains an unresolved
   merge conflict (duplicated `for` loops, e.g. `RUNTIME_FILES` vs `RUNTIME_MODULES`)
   that causes an `IndentationError` at collection time and also lacks the required
-  metadata header. As a result `pytest` fails at collection. The remaining 63 tests
-  pass when this file is excluded (`pytest --ignore=tests/test_contract_spec.py`).
-  Resolving this file is the natural first fix; the intended logic lives in
-  `pcea/contract.py` (use `RUNTIME_MODULES` and `FORBIDDEN_UCNS_SYMBOLS`).
+  metadata header. As a result a plain `pytest` aborts during collection (the bad
+  file interrupts the whole run).
+- **Excluding the file does NOT make the suite green.** Running
+  `pytest --ignore=tests/test_contract_spec.py` lets the other modules collect
+  (~64 tests), but `tests/test_metadata_headers.py` still fails: it globs
+  `pcea/*.py` and `tests/*.py` on disk, and `tests/test_contract_spec.py` is
+  still present without the required header line. So the exclusion run reports
+  one failure (the metadata-header test) with the rest passing — not a clean
+  pass. To actually get a green suite you must fix the file (resolve the merge
+  conflict and add the header), not merely skip it. Re-derive the exact pass
+  count from `pytest -q` rather than trusting a hard-coded number here.
+  The intended logic lives in `pcea/contract.py` (use `RUNTIME_MODULES` and
+  `FORBIDDEN_UCNS_SYMBOLS`); resolving this file is the natural first fix.
 - CI (`contract-boundary.yml`) runs only `test_contract_spec.py`, so the broken file
   blocks that gate too.
 
