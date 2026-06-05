@@ -4,6 +4,28 @@
 This module centralizes the contract boundary so docs, tests, and tooling share
 one source of truth.
 """
+
+# === MODULE_BUILD ===
+# id: pcea_contract
+#   module_name: contract
+#   module_kind: schema
+#   summary: PCEA<->UCNS interface-contract constants and guardrails (single source of truth)
+#   owner: Erin Spencer
+#   public_surface: DECISION, SECURITY_INVARIANT, FORBIDDEN_UCNS_SYMBOLS, RUNTIME_MODULES, contract_statement
+#   internal_surface: none
+#   auth_boundary: none
+#   storage_boundary: none
+#   network_boundary: none
+#   user_data_boundary: none
+#   admin_only: false
+#   tests: tests.test_contract_spec
+#   rollout: default_enabled
+#   rollback: remove module and its references
+#   requires: none
+#   since: 2026-06-02
+#   unresolved: none
+# === END MODULE_BUILD ===
+
 from __future__ import annotations
 
 DECISION = "A"  # Invert via keys, never via UCNS inverse/catalogue APIs.

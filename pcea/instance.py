@@ -9,6 +9,28 @@ so that sender and receiver stay synchronized without manual state management.
 Each seed is a 7×7 structure: 7 circles × 7 tensors. Each circle is itself
 a tensor; each seed is itself a tensor.
 """
+
+# === MODULE_BUILD ===
+# id: pcea_instance
+#   module_name: instance
+#   module_kind: service
+#   summary: stateful PCEA session that auto-advances last_state so sender/receiver stay synchronized
+#   owner: Erin Spencer
+#   public_surface: PCEAInstance
+#   internal_surface: _zero_seed
+#   auth_boundary: none
+#   storage_boundary: none
+#   network_boundary: none
+#   user_data_boundary: none
+#   admin_only: false
+#   tests: tests.test_instance
+#   rollout: default_enabled
+#   rollback: remove module and its references
+#   requires: pcea_cipher
+#   since: 2026-06-02
+#   unresolved: none
+# === END MODULE_BUILD ===
+
 from __future__ import annotations
 
 import copy

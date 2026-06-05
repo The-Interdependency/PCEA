@@ -15,6 +15,28 @@ Prime selection: p = prime_at(circle_idx * 7 + tensor_idx)
 Fixed digit count: k = digit_count(p, word_bits)
 Key: SHA-256(own + heptagram neighbors ±3, seed_idx, circle_idx, tensor_idx)
 """
+
+# === MODULE_BUILD ===
+# id: pcea_cipher
+#   module_name: cipher
+#   module_kind: engine
+#   summary: prime-circular Mobius disk cipher: fixed-width base-p digit encode with SHA-256 keyed additive shift
+#   owner: Erin Spencer
+#   public_surface: encrypt_seed, decrypt_seed, encrypt_state, decrypt_state, CIRCLE_COUNT, TENSOR_COUNT, DEFAULT_WORD_BITS
+#   internal_surface: _validate_seed, _contributors, _encrypt_element, _decrypt_element
+#   auth_boundary: none
+#   storage_boundary: none
+#   network_boundary: none
+#   user_data_boundary: none
+#   admin_only: false
+#   tests: tests.test_cipher
+#   rollout: default_enabled
+#   rollback: remove module and its references
+#   requires: pcea_codec, pcea_kdf, pcea_primes
+#   since: 2026-06-02
+#   unresolved: security-critical module; changes require independent crypto review
+# === END MODULE_BUILD ===
+
 from __future__ import annotations
 
 from .codec import digit_count, from_fixed, mobius_decode, mobius_encode, to_fixed

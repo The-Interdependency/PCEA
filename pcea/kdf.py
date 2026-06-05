@@ -9,6 +9,28 @@ encryption depends on its own last_state value AND the last_state of the
 two circles it interlocks with — implementing the circular interlocking
 property of the seven-disk structure.
 """
+
+# === MODULE_BUILD ===
+# id: pcea_kdf
+#   module_name: kdf
+#   module_kind: engine
+#   summary: hash-based key-stream derivation keyed by hierarchical address plus heptagram neighbors
+#   owner: Erin Spencer
+#   public_surface: key_stream
+#   internal_surface: none
+#   auth_boundary: none
+#   storage_boundary: none
+#   network_boundary: none
+#   user_data_boundary: none
+#   admin_only: false
+#   tests: tests.test_kdf
+#   rollout: default_enabled
+#   rollback: remove module and its references
+#   requires: none
+#   since: 2026-06-02
+#   unresolved: none
+# === END MODULE_BUILD ===
+
 from __future__ import annotations
 
 import hashlib
