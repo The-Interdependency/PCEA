@@ -27,7 +27,7 @@ published under The Interdependency.
 | Description | Prime Circular Encryption Algorithm — neural architecture state encryption |
 | Status | hmmm |
 | Python | >=3.9 |
-| License | AGPL-3.0-or-later |
+| License | MIT |
 | Build backend | `setuptools.build_meta` |
 | Author(s) | Erin Patrick Spencer <wayseer@interdependentway.org> |
 | Repository | https://github.com/The-Interdependency/PCEA |
@@ -44,7 +44,7 @@ published under The Interdependency.
 
 **Python requirement:** ≥ 3.9 (CI matrix: 3.9, 3.11, 3.13)
 **External dependencies:** none at runtime (stdlib only — `hashlib`, `copy`); `pytest` for dev
-**License:** AGPL-3.0-or-later (dual-licensed commercial option)
+**License:** MIT (relicensed from AGPL-3.0)
 
 ---
 
@@ -115,8 +115,8 @@ benchmarks/
 
 .agents/skills/   meta-module-build / msdmd / test-build agent skill docs
 
-pyproject.toml    Package config (setuptools, AGPL-3.0-or-later, Python >= 3.9)
-README.md  LICENSE  LICENSE-COMMERCIAL.md
+pyproject.toml    Package config (setuptools, MIT, Python >= 3.9)
+README.md  LICENSE
 ```
 
 ---
@@ -241,7 +241,7 @@ assert dec.decrypt(e1) == [seed(99)]
 - Feature branches: `feat/<description>`, `fix/<description>`, `docs/<description>`
 - Commit style: Conventional Commits (`feat(pcea):`, `fix(cipher):`, etc.)
 - Author: Erin Patrick Spencer (wayseer@interdependentway.org)
-- License: AGPL-3.0-or-later (dual-licensed commercial option)
+- License: MIT (relicensed from AGPL-3.0)
 
 ## Agent module-build doctrine
 
