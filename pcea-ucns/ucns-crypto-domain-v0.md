@@ -45,10 +45,22 @@ Three measured facts shape every answer below.
 ## The ten questions (PLAN.md Phase 1)
 
 **1. What is a UCNS private key?**
-Candidate: structure the public projection's carrier does *not* reveal —
-specifically (a) the angle *positions* within a fixed, publicly-known
-carrier, (b) face-bit configuration, and (c) payload structure at a depth
-beyond any catalogue-complete domain. NOT carrier choice (leaked, fact 1).
+**OPEN — the v0 candidate is REFUTED.** The v0 conjecture was that the
+private key could hide in angle *position* / face bits / payload at a
+fixed public carrier, since the Carrier-LCM Law only projects the
+carrier. The positional attack harness (`positional_attack.py`,
+`tests/test_positional_attack.py`) refutes this directly: at a held-fixed
+public carrier, `factor_search_v08` recovers a recomposing factorization
+in **60/60** trials across carriers 15, 40 (the named candidate), and
+105, and the *exact* private factor in ~45–57%. Larger carriers do not
+help. The reason is structural, not arithmetic: the search already
+recovers host angles AND faces, and — decisively — **non-uniqueness means
+an attacker needs only SOME factor pair that recomposes P, not the exact
+private key**, since the shared secret derives from the factorization.
+Holding the carrier fixed removes the carrier leak but leaves the whole
+factorization attack intact. A viable private-key location must therefore
+defeat factorization itself, not merely the carrier projection — which
+returns the entire question to the cross-prime analytic frontier (Q6).
 
 **2. What is a UCNS public key?**
 A UCNS object whose carrier and gross shape are publishable, derived from
@@ -127,9 +139,10 @@ through the ucns analytic frontier, not through this document.
 
 `factor_search_v08`, `left_quotient` / `right_quotient`,
 `prune_catalogue` / `prune_payload_catalogue`, `canonical_factorization`,
-and the frozen oracle catalogue. `attack_harness.py` wires the first set
-against candidate domains; expanding it to the full set is the Phase-1
-follow-on.
+and the frozen oracle catalogue. `attack_harness.py` wires the carrier
+and pruning attacks; `positional_attack.py` wires the fixed-carrier
+positional attack (which refuted Q1 v0). Expanding to the full quotient
+and canonical-selection tools is the Phase-1 follow-on.
 
 ## hmmm
 
@@ -137,6 +150,14 @@ follow-on.
   the same open problem as ucns cross-prime widening, now wearing a
   security hat. If that frontier closes, PCEA-UCNS must fall back to
   symmetric-only — which `contract.py` already ensures it can.
-- Q1's claim that angle-position is not Law-projected needs its own
-  attack: a positional analog of `factor_search`. Not yet built; until
-  it is, "the Law doesn't reach here" is a conjecture, not a result.
+- Q1's conjecture (angle-position hides the key) is now **refuted** by
+  `positional_attack.py`: fixing the carrier does not defeat
+  factorization, and non-uniqueness means *any* recomposing pair breaks
+  the scheme. The consequence is sharp — **there is no "easy" private-key
+  location that dodges the frontier.** A UCNS-KEM is feasible *only* if
+  cross-prime factoring is genuinely hard, and that is exactly the open
+  problem. Phase 2 (`kem.py`) should not be built until that hardness has
+  evidence beyond "currently open."
+- The honest one-line status: PCEA-UCNS is blocked on a UCNS theorem that
+  does not yet exist, and today's attacks confirm the block is real
+  rather than a gap in design effort.
