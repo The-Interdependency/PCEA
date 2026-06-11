@@ -121,6 +121,33 @@ kilobytes, decapsulation within interactive latency on the reference
 device (Termux / Galaxy A16). Carrier magnitude trades directly against
 both — a Phase-2 measurement, not a guess.
 
+## Three-factor candidate (P = A ⊠ B ⊠ C) — partial protection, not safety
+
+After the two-factor Q1 refutation, the natural next candidate is a
+private key that is one factor of an ORDERED triple product, with the
+public product P = A ⊠ B ⊠ C published and C designated private.
+`three_factor_attack.py` measures it (carriers 15, 40, 105):
+
+- **recompose 80/80** — the search always finds *a* valid two-factor
+  split of the triple product.
+- **first-split-clean 0/80** — but the split is *never* exactly
+  (A ⊠ B, C). Ordered composition smears the private-factor boundary: a
+  single split cuts across factors, not along them. This is real,
+  measurable structure the two-factor case did not have.
+- **recursive-peel recovers C ~42–49%** — an attacker who peels
+  iteratively (factor the split, then factor the parts) recovers the
+  designated private factor about half the time.
+
+**Conclusion: three factors degrade the attack but do not defeat it.**
+The boundary-smearing is genuine partial protection — the most promising
+direction so far — but a ~45% recovery rate is catastrophic for a key.
+Three-factor composition alone is NOT a viable KEM foundation. It is,
+however, the first structure that interacts with the attack non-trivially,
+and the smearing mechanism (ordered cross-products mixing factor
+boundaries) is the thing to understand before the next candidate: more
+factors, deeper payloads, or a composition the attacker cannot assume the
+order of.
+
 ## Toy domain (for tests)
 
 A deliberately breakable domain: small ⟨2,5⟩ carriers, catalogue
@@ -161,3 +188,11 @@ and canonical-selection tools is the Phase-1 follow-on.
 - The honest one-line status: PCEA-UCNS is blocked on a UCNS theorem that
   does not yet exist, and today's attacks confirm the block is real
   rather than a gap in design effort.
+- Three-factor composition is the first candidate to interact with the
+  attack non-trivially: ordered cross-products smear the private-factor
+  boundary (first-split-clean 0/80), but recursive peeling still recovers
+  the private factor ~45%. The smearing is the signal worth chasing —
+  next probes: (a) does peel recovery fall as factor count grows past 3?
+  (b) does hiding the composition order, not just the factors, raise the
+  attacker's cost? (c) a quotient-based attack to confirm the result is
+  not an artifact of factor_search's loop ordering.
