@@ -184,7 +184,48 @@ right), or moving the secret out of the factor-recovery problem entirely
 (payload depth past catalogue-completeness, with its own attack tool yet
 to be built). Both are open; neither is claimed.
 
-## Toy domain (for tests)
+## Quotient attack corrects the verdict: hardness relocated, not removed
+
+The factor-count finding above used `factor_search_v08`, which searches
+the FULL object space. The `left_quotient` primitive — no internal search
+heuristic — re-asks the question restricted to a finite KEY SPACE, and
+**disagrees** (`quotient_attack.py`, carrier 40, key space of 40):
+
+- **Divisor count: mean ~1.1, max 2.** Given public P = A ⊠ B with A, B
+  drawn from the key space, the number of key-space candidates A′ that
+  left-divide P is essentially one. **The private left factor is nearly
+  unique within the key space.**
+- **Reconciliation:** `factor_search`'s splits land OUTSIDE the key space
+  ~55% of the time — full-space factorizations that are not usable keys —
+  while the quotient finds the private factor unique within the key space
+  37/40.
+
+So the earlier "non-uniqueness defeats it" verdict measured the wrong
+space. Corrected: **full-space non-uniqueness does not defeat a KEM whose
+secret is key-space-restricted.** The many decompositions a factorizer
+finds are mostly outside the key space and so cannot serve as the private
+key.
+
+This is genuine progress *and* a relocated assumption, stated as both:
+
+- *Progress:* there exists a regime (finite key space, quotient-checked)
+  where the private factor is effectively unique — the property a KEM
+  needs, which two-factor and multi-factor full-space attacks appeared to
+  deny.
+- *Relocated hardness:* an attacker who knows the key-space structure
+  enumerates it and finds the unique divisor by quotient in |key space|
+  cheap operations. Security now rests on (a) the key space being
+  infeasible to enumerate, and (b) no quotient-guided shortcut beating
+  brute-force enumeration. Both are OPEN. The quotient is *fast*, so (b)
+  is the live danger: a method that uses partial quotient structure to
+  prune the key space would be the real break, and no analysis yet rules
+  it out.
+
+The honest status improves from "blocked by non-uniqueness" to
+"plausible in a key-space-restricted regime, pending two unproven
+hardness conditions." Better-posed; not solved.
+
+
 
 A deliberately breakable domain: small ⟨2,5⟩ carriers, catalogue
 provided. Used to confirm the harness *recovers* keys here (negative
@@ -232,3 +273,11 @@ and canonical-selection tools is the Phase-1 follow-on.
   (b) does hiding the composition order, not just the factors, raise the
   attacker's cost? (c) a quotient-based attack to confirm the result is
   not an artifact of factor_search's loop ordering.
+- The quotient attack (c, now done) overturned the interim verdict: the
+  private factor IS nearly unique within a finite key space; full-space
+  non-uniqueness was the wrong measure. The live danger is now sharp and
+  singular — the quotient is fast, so a quotient-GUIDED key-space search
+  (using partial quotient structure to prune candidates) is the attack
+  that would break a key-space-restricted KEM. Building that attack is
+  the next real probe; until it runs, "infeasible to enumerate" is a hope
+  about size, not a demonstrated hardness.
