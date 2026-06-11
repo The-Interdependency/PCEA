@@ -232,6 +232,41 @@ provided. Used to confirm the harness *recovers* keys here (negative
 control — the domain MUST fall), so that survival on the real candidate
 domain is meaningful by contrast.
 
+## The break attempt: quotient-guided pruning is constant-factor, not polynomial
+
+The quotient correction left one live danger: a quotient-GUIDED key-space
+search that beats brute-force enumeration. `pruning_scaling.py` mounts
+that attack and measures its SCALING — the only thing that separates a
+real break from a harmless speedup. Two cheap-heuristic attacks, scored
+by candidates checked before reaching the private factor, as |key space|
+grows from 40 to 1000:
+
+- **Prefix-angle ordering** (rank candidates by angle overlap with P):
+  cost ~ |KS|^0.89, speedup 3.8×→5.7×.
+- **Strongest cheap prune** (carrier-support containment — *the cipher's
+  own Corollary 2 turned adversarial* — plus prefix-angle membership,
+  then quotient-check survivors): cost ~ |KS|^1.03, ratio-to-|KS| pinned
+  near **0.10** across the whole range.
+
+**Result: both attacks are constant-factor (cost stays Θ(|KS|)), not
+polynomial.** The signature of a real break is `ratio_to_|KS| → 0`; here
+it holds flat. The heuristics REORDER the search but do not SHRINK it. A
+constant ~10× speedup is absorbed by enlarging the key space a few bits.
+
+Stated at exact strength: **no polynomial break was found at the
+cheap-heuristic level, including the cipher's own pruning corollaries
+turned against it.** This is a positive result, and it is NOT a hardness
+proof. A cleverer attack — exploiting the recursive *payload* quotient,
+or algebraic relations among divisors, or the composition-order structure
+— could still find sublinear scaling. What today rules out is the obvious
+class: linear quotient-guided pruning does not break the key-space-
+restricted regime.
+
+This is the first affirmative evidence that the key-space-restricted KEM
+*regime* can resist its most natural attack. The hardness assumption
+(Q6 / the live danger) is now: "no sublinear quotient-guided key-space
+search exists," with the linear-heuristic class empirically eliminated.
+
 ## Real candidate domain (described, not secured)
 
 Cross-prime carriers well beyond oracle-complete bounds, private structure
@@ -281,3 +316,11 @@ and canonical-selection tools is the Phase-1 follow-on.
   that would break a key-space-restricted KEM. Building that attack is
   the next real probe; until it runs, "infeasible to enumerate" is a hope
   about size, not a demonstrated hardness.
+- The break attempt (now done) found the cheap quotient-guided attacks —
+  prefix-angle ordering and carrier-support pre-filtering — to be
+  constant-factor (Θ(|KS|)), not polynomial. The key-space-restricted
+  regime survives its most natural attack. Remaining danger, narrowed:
+  a SUBLINEAR attack exploiting recursive-payload-quotient structure or
+  algebraic divisor relations. That is the next probe, and the cleanest
+  statement of the open problem PCEA-UCNS now rests on: *is there a
+  sublinear quotient-guided search over a structured UCNS key space?*
