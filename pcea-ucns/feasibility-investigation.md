@@ -177,6 +177,22 @@ PYTHONPATH=/path/to/ucns python pcea-ucns/prefix_read_break.py
 Tests: `PYTHONPATH=/path/to/ucns python -m pytest tests/` (harness tests
 skip cleanly without ucns).
 
+## Postscript: the lossy-projection candidate and its break
+
+After the general barrier, a lossy-projection action
+(set-project(s ⊠ g)) was found to be one-way against the QUOTIENT
+(inverts 3/200) and injective with scalable entropy — the first
+counterexample to the barrier as originally stated. Open Attack 1 then
+broke it: the action's angles are a Minkowski sum {a_i + g_j mod 4}, and
+an attacker recovers a usable secret by set-basis cover, at cost that
+plateaus while the brute key space grows quadratically (asymptotic break).
+
+Amended barrier: a UCNS public map is broken if its image admits ANY
+efficient inverse, not only the quotient. Set-projection relocates
+invertibility from quotient to Minkowski-sum; it does not remove it. A
+UCNS-native one-way map must defeat BOTH inverses simultaneously, and
+nothing tested does. (attack1_minkowski_break.py)
+
 ## hmmm
 
 - The arc's shape is itself the finding: a construction that is refuted in
