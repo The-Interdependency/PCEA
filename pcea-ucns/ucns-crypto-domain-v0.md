@@ -148,6 +148,42 @@ boundaries) is the thing to understand before the next candidate: more
 factors, deeper payloads, or a composition the attacker cannot assume the
 order of.
 
+## Factor count is irrelevant — non-uniqueness is the structural defeater
+
+The boundary-smearing in the three-factor case raised the hope that
+recovery DECAYS with factor count: that a 5- or 6-factor product hides a
+designated private factor better. `factor_count_sweep.py` tests it at
+carrier 40 and finds **no decay** — recursive-peel recovery runs ~40–67%
+flat across 2..6 factors, noise with no downward trend. More factors give
+the attacker more leaves to match, not the defender more cover.
+
+The diagnosis underneath is the important part. For a 5-factor product,
+the search's split equals the TRUE ordered (prefix, C) in **0/80** trials
+and lands on some OTHER valid decomposition in **80/80**. The public
+product admits *many* ordered factorizations. That is fatal independent
+of factor count:
+
+- If the KEM secret derives from ANY recomposing decomposition, the
+  attacker supplies one and the scheme is **broken**.
+- If it derives from the UNIQUE true ordered decomposition, that
+  decomposition is not recoverable even by honest parties from P alone,
+  so the scheme is **non-functional**.
+
+**Non-uniqueness of UCNS factorization is the structural barrier to a
+factorization-based KEM, at every factor count.** This is the same fact
+the ucns claims ledger records as "Theorem N returns *a* valid
+factorization, not a canonical one" — and the canonical-selection work
+(`canonical_factorization`) makes a *deterministic* choice but does not
+make the factorization *unique*; an attacker runs the identical selector
+and reaches the identical choice. Canonicalization gives determinism, not
+secrecy.
+
+The escape, if one exists, is not more factors but a different hardness:
+hiding the composition *order* (so the attacker cannot assume left-to-
+right), or moving the secret out of the factor-recovery problem entirely
+(payload depth past catalogue-completeness, with its own attack tool yet
+to be built). Both are open; neither is claimed.
+
 ## Toy domain (for tests)
 
 A deliberately breakable domain: small ⟨2,5⟩ carriers, catalogue
