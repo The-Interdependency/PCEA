@@ -73,8 +73,8 @@ pip install ".[dev]"   # adds pytest
 
 ## License
 
-Dual-licensed: **AGPL-3.0-or-later** (default open source) or a separate
-commercial license. See `LICENSE` and `LICENSE-COMMERCIAL.md`.
+**MIT** licensed. See `LICENSE`. (Relicensed from AGPL-3.0 to MIT for
+frictionless adoption.)
 
 ## Author
 

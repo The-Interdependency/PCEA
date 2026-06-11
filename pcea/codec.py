@@ -21,6 +21,28 @@ value does not leak through output length.
     to_fixed(u, p, k)             -> k digits in {0..p-1}, little-endian
     from_fixed(digits, p)         -> unsigned integer
 """
+
+# === MODULE_BUILD ===
+# id: pcea_codec
+#   module_name: codec
+#   module_kind: adapter
+#   summary: Mobius disk codec: signed<->unsigned position mapping and fixed-width base-p digit encoding
+#   owner: Erin Spencer
+#   public_surface: mobius_encode, mobius_decode, digit_count, to_fixed, from_fixed
+#   internal_surface: none
+#   auth_boundary: none
+#   storage_boundary: none
+#   network_boundary: none
+#   user_data_boundary: none
+#   admin_only: false
+#   tests: tests.test_codec
+#   rollout: default_enabled
+#   rollback: remove module and its references
+#   requires: none
+#   since: 2026-06-02
+#   unresolved: none
+# === END MODULE_BUILD ===
+
 from __future__ import annotations
 
 
