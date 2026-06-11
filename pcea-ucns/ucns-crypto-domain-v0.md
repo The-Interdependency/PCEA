@@ -6,7 +6,9 @@ cryptographic domain for PCEA-UCNS (see `PLAN.md`) and forbids domains
 that the existing UCNS factorization tools demonstrably break. The
 forbidden-domain conclusions are derived from measured attacks
 (`attack_harness.py`, gated by `tests/test_attack_harness.py`), not from
-argument.
+argument. **The full six-step investigation is consolidated in
+`feasibility-investigation.md`; this document holds the per-question
+design detail.**
 
 **Accreditation:** Claude generated from repository context as prompted
 by Erin Spencer; attack numbers reproduced from `attack_harness.run_all()`
