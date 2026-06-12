@@ -1,0 +1,28 @@
+{
+  "title": "UCNS: Universal Canonical Number System",
+  "description": "A geometric-arithmetic algebra over recursive paired traversal objects on the doubled cover of the unit circle. Includes algebraic factorization (Theorem N), the Carrier-LCM Law (DEFENDED+TEST-BACKED via catalogue_pruning: 324 tests, 2564 subtests), and Lean 4 formal core definitions.",
+  "creators": [
+    {
+      "name": "Erin (Way Seer)",
+      "affiliation": "Interdependency LLC"
+    }
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "access_right": "open",
+  "keywords": [
+    "algebraic factorization",
+    "formal verification",
+    "Lean 4",
+    "canonical number systems",
+    "spinor double cover",
+    "epicyclic composition"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://github.com/The-Interdependency/ucns",
+      "resource_type": "software"
+    }
+  ]
+}
