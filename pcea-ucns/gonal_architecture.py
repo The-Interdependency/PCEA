@@ -86,12 +86,36 @@ ATTACK RESULTS (run; one gate remains)
      consuming distinct 53-wide slices per tick gives 19657/20000 distinct
      (38 reused, largest group 11). The harness now uses the full-state
      keystream; the weakness was scalarization, not the cipher.
-  3. The 53->32 dimension bridge: STILL THE GATE, and now load-bearing —
-     it is not mere dimension-matching, it IS the Attack-2 fix. The bridge
-     from 53-wide PCEA state to gonal rotation must preserve the state
-     entropy (the full-state slice above is a candidate, not a proven
-     bridge). A real implementation must specify and attack this mapping
-     before trust; the slice function here is illustrative.
+  3. The 53->32 dimension bridge: RUN. The illustrative arithmetic slice
+     bridge FAILED two sub-tests at 200000 ticks: rotation uniformity
+     (chi2=103 vs crit 52 — biased; mod-32 of a skewed 53-dim combine
+     inherits the skew) and serial independence (chi2=1221 vs 1098 —
+     consecutive rotations correlated). Largest same-keystream group grew
+     to 105 (still below frequency-analysis starvation for 32 symbols, so
+     not broken at 200k, but the margin is real). FIX, demonstrated: a
+     HASH-WHITENED bridge (blake2b over the full 53-wide state, then reduce)
+     gives uniformity chi2=23, serial chi2=1022 (both under crit), 200000/
+     200000 distinct, largest group 1 — every defect vanishes. The
+     bias+correlation were the arithmetic slice's fault, not fundamental
+     to 53->32.
+
+     CONCESSION (stated, not hidden): the hash bridge imports blake2b. It is
+     stdlib hashlib (within PCEA's dependency covenant), but the rotation's
+     uniformity then rests on blake2b, not on UCNS's own structure. A
+     UCNS-native whitening (carrier/gonal mixing achieving uniformity
+     without a hash) is not known to exist and is its own open question.
+     The cipher is UCNS-native in keystream and quantizer; the WHITENING
+     currently leans on a standard hash.
+
+ALL THREE GATES CLEARED — two only after the attack forced the fix. The
+gonal cipher survived its named attacks not by being unbreakable but by
+being repairable under attack: each break taught its exact fix, and the
+fixes hold under measurement (CPA random; full-state keystream kills
+derivation reuse; hash-whitening kills bridge bias). What remains before
+"cipher" rather than "strong candidate": an independent review, a
+UCNS-native (hash-free) whitening if the covenant purism demands it, and
+the standard battery (IND-CPA/CCA formalization) no in-repo harness
+substitutes for.
 
 Until 1-3 run and survive, this is a research artifact. The cipher
 implementation belongs in a0-betatest (Emergent), behind the ZFAE decoder
