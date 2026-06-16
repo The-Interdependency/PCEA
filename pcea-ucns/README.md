@@ -56,6 +56,13 @@ PCEA transform and speculative UCNS-native key establishment.
 | Structural readout breaks | `prefix_read_break.py`, `attack1_minkowski_break.py` | Look for direct reconstruction or algebraic inversion that bypasses key-space search | Negative gates: tested candidate families break |
 | Gonal/state communication | `gonal_architecture.py` | Explore PCEA-advanced private gonal rotation for state/token communication | Experimental; further bridge/attack gates remain |
 
+## Potential next avenues
+
+See `avenues.md` for a bounded research agenda: pre-shared and hybrid fallback
+paths, UCNS-as-context binding, non-product one-way-map candidates, hidden
+composition-order experiments, payload-depth tests, gonal bridge work,
+commitment use, ratcheted PCEA sessions, and a candidate ledger.
+
 ## How to use it
 
 Run the whole repository:
