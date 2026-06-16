@@ -35,7 +35,7 @@ published under The Interdependency.
 | Optional extras | `dev` |
 | Keywords | none |
 | CI workflows | `contract-boundary.yml`, `manifest-check.yml` |
-| Top-level directories | `benchmarks/` · `pcea/` · `tests/` |
+| Top-level directories | `benchmarks/` · `docs/` · `pcea/` · `pcea-ucns/` · `tests/` |
 
 <sub>Derived from `pyproject.toml` + the repo tree. Unknown fields surface as `hmmm` rather than a guess.</sub>
 <!-- END GENERATED:manifest -->
