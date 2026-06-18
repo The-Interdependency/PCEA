@@ -55,6 +55,7 @@ PCEA transform and speculative UCNS-native key establishment.
 | Key-space restriction | `quotient_attack.py`, `pruning_scaling.py` | Ask whether the private factor is unique inside a finite key space and whether pruning beats brute search | Useful distinction; cheap pruning measured as constant-factor, not a proof |
 | Structural readout breaks | `prefix_read_break.py`, `attack1_minkowski_break.py` | Look for direct reconstruction or algebraic inversion that bypasses key-space search | Negative gates: tested candidate families break |
 | Gonal/state communication | `gonal_architecture.py` | Explore PCEA-advanced private gonal rotation for state/token communication | Experimental; further bridge/attack gates remain |
+| Candidate ledger | `candidate-ledger.json` | Track every UCNS-assisted PCEA candidate, its claim, public/private material, known attacks, harnesses, status, and next attack | Process guardrail; not a security proof |
 
 ## Potential next avenues
 
@@ -102,6 +103,7 @@ A new candidate belongs here only if it includes:
    or an unresolved gate.
 5. No runtime import path from `pcea/` into the proving-ground code unless the
    PCEA↔UCNS contract is deliberately changed and reviewed.
+6. A `candidate-ledger.json` entry naming the candidate status and next attack.
 
 The preferred outcome is a clean refutation. A candidate that survives one
 harness should immediately earn a harder harness, not a security claim.
