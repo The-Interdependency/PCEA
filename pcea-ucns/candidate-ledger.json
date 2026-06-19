@@ -43,6 +43,17 @@
       "next_attack": "Define canonical UCNS transcript serialization and test that every identity/session/capability change changes derived keys and tags."
     },
     {
+      "id": "option-d-one-way-map-gate",
+      "claim": "Before any new UCNS-native one-way-map candidate gets happy-path KEM code, it must define its public map and pass a complete inverse-family attack agenda gate.",
+      "public_material": ["candidate public map description", "base object", "published image", "algorithm parameters"],
+      "private_material": ["candidate secret object", "honest shared image or derived secret"],
+      "known_attacks": ["quotient division", "prefix or normalization readout", "Minkowski set-basis recovery", "catalogue pruning", "finite key-space enumeration", "meet-in-the-middle", "active malleability", "honest correctness failure", "false scaling law"],
+      "harness": "pcea-ucns/one_way_map_gate.py",
+      "tests": ["tests/test_one_way_map_gate.py"],
+      "status": "open-research",
+      "next_attack": "Use the gate to reject product-shaped or set-projection-shaped maps, then write concrete UCNS harnesses for any candidate that has complete attack coverage."
+    },
+    {
       "id": "oracle-catalogue-domain",
       "claim": "Small catalogue-complete UCNS domains can hide key material.",
       "public_material": ["UCNS product", "carrier", "catalogue-bounded parameters"],

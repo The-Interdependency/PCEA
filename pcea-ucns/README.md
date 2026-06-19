@@ -56,6 +56,7 @@ PCEA transform and speculative UCNS-native key establishment.
 | Structural readout breaks | `prefix_read_break.py`, `attack1_minkowski_break.py` | Look for direct reconstruction or algebraic inversion that bypasses key-space search | Negative gates: tested candidate families break |
 | Gonal/state communication | `gonal_architecture.py` | Explore PCEA-advanced private gonal rotation for state/token communication | Experimental; further bridge/attack gates remain |
 | Candidate ledger | `candidate-ledger.json` | Track every UCNS-assisted PCEA candidate, its claim, public/private material, known attacks, harnesses, status, and next attack | Process guardrail; not a security proof |
+| Option D one-way-map gate | `one_way_map_gate.py` | Reject UCNS-native one-way-map sketches that lack quotient, prefix, set-basis, catalogue, enumeration, MITM, active, correctness, and scaling attack coverage | Attack-agenda gate; not a security proof |
 
 ## Potential next avenues
 
@@ -104,6 +105,8 @@ A new candidate belongs here only if it includes:
 5. No runtime import path from `pcea/` into the proving-ground code unless the
    PCEA↔UCNS contract is deliberately changed and reviewed.
 6. A `candidate-ledger.json` entry naming the candidate status and next attack.
+7. For Option D / UCNS-native one-way-map candidates, a `one_way_map_gate.py`
+   pass showing the attack agenda is complete before happy-path KEM code.
 
 The preferred outcome is a clean refutation. A candidate that survives one
 harness should immediately earn a harder harness, not a security claim.
