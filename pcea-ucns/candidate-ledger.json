@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "status_values": [
+    "broken",
+    "forbidden",
+    "survives-current-harness",
+    "open-research",
+    "recommended-engineering"
+  ],
+  "boundary": "PCEA runtime remains symmetric and state-synchronized. UCNS entries here are proving-ground candidates, attack records, or context layers; they are not shipped public-key claims.",
+  "candidates": [
+    {
+      "id": "provisioned-symmetric-pcea",
+      "claim": "Use out-of-band provisioned entropy to synchronize PCEA peers, then add ratcheting, key separation, and transcript-bound authentication.",
+      "public_material": ["algorithm parameters", "message numbers", "authenticated associated data", "optional UCNS context identifiers"],
+      "private_material": ["provisioned seed", "traffic secrets", "last_state", "ratchet state"],
+      "known_attacks": ["wrong-key recovery", "replay", "reordering", "truncation", "ratchet desynchronization", "unauthenticated state advancement"],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
+      "status": "recommended-engineering",
+      "next_attack": "Build a non-runtime ratcheted-session prototype and test replay, transcript mismatch, rollback-safe decrypt failure, and resynchronization metadata leakage."
+    },
+    {
+      "id": "hybrid-kem-keys-pcea",
+      "claim": "Use a reviewed standard KEM or Diffie-Hellman layer to establish the initial PCEA shared secret when cold-start communication is required.",
+      "public_material": ["standard KEM/DH public keys", "encapsulation packet", "algorithm identifiers", "transcript context"],
+      "private_material": ["KEM/DH private key", "derived shared secret", "PCEA session state"],
+      "known_attacks": ["dependency-policy bypass", "homegrown standard-crypto implementation error", "invalid public key", "transcript downgrade", "key-compromise impersonation"],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
+      "status": "open-research",
+      "next_attack": "Write a dependency-policy decision record before code; require external test vectors and negative tests if an implementation is ever attempted."
+    },
+    {
+      "id": "ucns-context-binding",
+      "claim": "Use canonical UCNS objects as identity, capability, session, and transcript context hashed into PCEA key derivation and MAC associated data; UCNS is not the source of secrecy.",
+      "public_material": ["canonical UCNS context", "session identifiers", "capability labels", "algorithm version"],
+      "private_material": ["provisioned or KEM-derived secret", "PCEA traffic secrets"],
+      "known_attacks": ["canonicalization collision", "context substitution", "equivalent-object serialization drift", "unknown-key-share"],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
+      "status": "open-research",
+      "next_attack": "Define canonical UCNS transcript serialization and test that every identity/session/capability change changes derived keys and tags."
+    },
+    {
+      "id": "option-d-one-way-map-gate",
+      "claim": "Before any new UCNS-native one-way-map candidate gets happy-path KEM code, it must define its public map and pass a complete inverse-family attack agenda gate.",
+      "public_material": ["candidate public map description", "base object", "published image", "algorithm parameters"],
+      "private_material": ["candidate secret object", "honest shared image or derived secret"],
+      "known_attacks": ["quotient division", "prefix or normalization readout", "Minkowski set-basis recovery", "catalogue pruning", "finite key-space enumeration", "meet-in-the-middle", "active malleability", "honest correctness failure", "false scaling law"],
+      "harness": "pcea-ucns/one_way_map_gate.py",
+      "tests": ["tests/test_one_way_map_gate.py"],
+      "status": "open-research",
+      "next_attack": "Use the gate to reject product-shaped or set-projection-shaped maps, then write concrete UCNS harnesses for any candidate that has complete attack coverage."
+    },
+    {
+      "id": "face-payload-spectrum-projection",
+      "claim": "Feed a concrete Option D UCNS map into the gate: compose internally, publish only coarse face/payload/carrier/denominator spectrum data, and require every inverse-family attack before any KEM path.",
+      "public_material": ["base UCNS object", "carrier-support spectrum", "cell-count buckets", "face-parity counts", "payload-depth counts", "denominator buckets", "algorithm parameters"],
+      "private_material": ["secret UCNS object", "exact angle positions", "exact faces", "payload bodies", "future honest bilateral spectrum image"],
+      "known_attacks": ["quotient-compatible lift search", "prefix or normalization readout", "Minkowski set-basis over denominator buckets", "catalogue pruning from spectrum constraints", "finite key-space enumeration", "meet-in-the-middle spectrum collisions", "active malleability", "honest agreement failure", "sublinear or plateauing scaling law"],
+      "harness": "pcea-ucns/option_d_ucns_map.py",
+      "tests": ["tests/test_option_d_ucns_map.py"],
+      "status": "open-research",
+      "next_attack": "Replace the spec-level attack descriptions with executable UCNS harnesses for quotient-compatible lifts, bucketed set-basis recovery, and honest bilateral agreement at toy scale."
+    },
+    {
+      "id": "oracle-catalogue-domain",
+      "claim": "Small catalogue-complete UCNS domains can hide key material.",
+      "public_material": ["UCNS product", "carrier", "catalogue-bounded parameters"],
+      "private_material": ["catalogue factor"],
+      "known_attacks": ["factor_search_v08 recovers random products in the frozen oracle domain", "carrier-support pruning accelerates catalogue search"],
+      "harness": "pcea-ucns/attack_harness.py",
+      "tests": ["tests/test_attack_harness.py"],
+      "status": "forbidden",
+      "next_attack": "None for promotion; keep as a negative control proving the harness breaks known-bad domains."
+    },
+    {
+      "id": "fixed-carrier-positional-key",
+      "claim": "Holding the public carrier fixed while hiding angle positions, faces, or payload structure can hide the private factor.",
+      "public_material": ["fixed-carrier public product", "algorithm parameters"],
+      "private_material": ["angle positions", "face bits", "payload structure"],
+      "known_attacks": ["factor_search_v08 recovers recomposing factorizations at held-fixed carrier", "non-unique recomposing factors are sufficient when the shared secret derives from a factorization"],
+      "harness": "pcea-ucns/positional_attack.py",
+      "tests": ["tests/test_positional_attack.py"],
+      "status": "broken",
+      "next_attack": "Do not revive without a new public map that defeats factorization itself, not merely the carrier projection."
+    },
+    {
+      "id": "multi-factor-product-kem",
+      "claim": "Publishing an ordered product with three or more factors can smear the private-factor boundary enough to hide a designated private factor.",
+      "public_material": ["ordered UCNS product", "carrier", "factor-count parameters"],
+      "private_material": ["designated private factor", "composition order"],
+      "known_attacks": ["recursive peeling recovers the designated factor at catastrophic rates", "factor-count sweep shows no protective decay across 2..6 factors", "full-space non-uniqueness does not create secrecy"],
+      "harness": "pcea-ucns/three_factor_attack.py; pcea-ucns/factor_count_sweep.py",
+      "tests": ["tests/test_three_factor_attack.py", "tests/test_factor_count_sweep.py"],
+      "status": "broken",
+      "next_attack": "Only revisit via hidden composition order or a key-space-restricted quotient model with explicit sublinear-search analysis."
+    },
+    {
+      "id": "key-space-restricted-quotient-regime",
+      "claim": "A private factor can be effectively unique inside a finite key space even when full-space factorizations are non-unique.",
+      "public_material": ["UCNS product", "public key-space definition", "carrier and parameter set"],
+      "private_material": ["key-space member that left-divides the product"],
+      "known_attacks": ["linear key-space enumeration via quotient", "carrier-support containment", "prefix-angle ordering", "possible recursive-payload quotient or algebraic divisor shortcuts"],
+      "harness": "pcea-ucns/quotient_attack.py; pcea-ucns/pruning_scaling.py",
+      "tests": ["tests/test_quotient_attack.py", "tests/test_pruning_scaling.py"],
+      "status": "survives-current-harness",
+      "next_attack": "Search for sublinear quotient-guided attacks exploiting recursive payload quotient structure, algebraic divisor relations, or composition-order leakage."
+    },
+    {
+      "id": "lossy-set-projection-action",
+      "claim": "Publishing set-project(secret multiply base) defeats quotient inversion while preserving honest two-sided agreement.",
+      "public_material": ["deduplicated angle set", "public base object"],
+      "private_material": ["secret UCNS object"],
+      "known_attacks": ["Minkowski set-basis recovery solves the projected action", "attack cost beats brute force asymptotically"],
+      "harness": "pcea-ucns/projection_action_candidate.py; pcea-ucns/attack1_minkowski_break.py",
+      "tests": ["tests/test_projection_action_candidate.py", "tests/test_attack1_minkowski_break.py"],
+      "status": "broken",
+      "next_attack": "Closed as a KEM candidate; any future lossy map must defeat both quotient inversion and set-basis inversion."
+    },
+    {
+      "id": "pcea-advanced-gonal-state-channel",
+      "claim": "Use PCEA-advanced private gonals as a synchronized state/token communication layer for parties sharing an instantiation seed.",
+      "public_material": ["public gonal vocabulary", "ciphertext angle sequence", "algorithm parameters"],
+      "private_material": ["instantiation seed", "private phase", "private vertex permutation", "PCEA keystream position"],
+      "known_attacks": ["static gonal frequency analysis", "static gonal known-plaintext recovery", "scalarized keystream reuse", "unresolved 53-to-32 bridge collision/reuse risk"],
+      "harness": "pcea-ucns/gonal_architecture.py; pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_gonal_architecture.py", "tests/test_option_family_specs.py"],
+      "status": "open-research",
+      "next_attack": "Specify and test the 53-to-32 bridge with chosen-plaintext, known-plaintext, reuse-group, collision-rate, and legitimate-recovery probes before any shipped gonal cipher."
+    },
+    {
+      "id": "ucns-commitments-delayed-disclosure",
+      "claim": "Use UCNS public objects as commitments to future state, capabilities, or transcript checkpoints, with standard-library hashing for binding.",
+      "public_material": ["commitment digest", "UCNS commitment object", "context", "algorithm version"],
+      "private_material": ["opened value", "nonce", "shared session secret when commitments are transcript-bound"],
+      "known_attacks": ["low-entropy brute force", "canonical-equivalence binding failure", "context substitution", "replay of stale commitments"],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
+      "status": "open-research",
+      "next_attack": "Prototype commit/open transcripts and test binding under UCNS canonical equivalence plus hiding against low-entropy brute force."
+    }
+  ]
+}
