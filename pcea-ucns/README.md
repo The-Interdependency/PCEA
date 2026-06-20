@@ -58,6 +58,7 @@ PCEA transform and speculative UCNS-native key establishment.
 | Candidate ledger | `candidate-ledger.json` | Track every UCNS-assisted PCEA candidate, its claim, public/private material, known attacks, harnesses, status, and next attack | Process guardrail; not a security proof |
 | Option D one-way-map gate | `one_way_map_gate.py` | Reject UCNS-native one-way-map sketches that lack quotient, prefix, set-basis, catalogue, enumeration, MITM, active, correctness, and scaling attack coverage | Attack-agenda gate; not a security proof |
 | Fed Option D UCNS map | `option_d_ucns_map.py` | Feed a face/payload spectrum projection into the Option D gate as the next concrete map to attack | Spec-level candidate; no security claim |
+| Fed non-D option specs | `option_family_specs.py` | Feed provisioned-session, context-binding, hybrid-policy, gonal-bridge, and commitment candidates into concrete spec gates | Harness agenda; no security claim |
 
 ## Potential next avenues
 

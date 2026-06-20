@@ -15,8 +15,8 @@
       "public_material": ["algorithm parameters", "message numbers", "authenticated associated data", "optional UCNS context identifiers"],
       "private_material": ["provisioned seed", "traffic secrets", "last_state", "ratchet state"],
       "known_attacks": ["wrong-key recovery", "replay", "reordering", "truncation", "ratchet desynchronization", "unauthenticated state advancement"],
-      "harness": null,
-      "tests": [],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
       "status": "recommended-engineering",
       "next_attack": "Build a non-runtime ratcheted-session prototype and test replay, transcript mismatch, rollback-safe decrypt failure, and resynchronization metadata leakage."
     },
@@ -26,8 +26,8 @@
       "public_material": ["standard KEM/DH public keys", "encapsulation packet", "algorithm identifiers", "transcript context"],
       "private_material": ["KEM/DH private key", "derived shared secret", "PCEA session state"],
       "known_attacks": ["dependency-policy bypass", "homegrown standard-crypto implementation error", "invalid public key", "transcript downgrade", "key-compromise impersonation"],
-      "harness": null,
-      "tests": [],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
       "status": "open-research",
       "next_attack": "Write a dependency-policy decision record before code; require external test vectors and negative tests if an implementation is ever attempted."
     },
@@ -37,8 +37,8 @@
       "public_material": ["canonical UCNS context", "session identifiers", "capability labels", "algorithm version"],
       "private_material": ["provisioned or KEM-derived secret", "PCEA traffic secrets"],
       "known_attacks": ["canonicalization collision", "context substitution", "equivalent-object serialization drift", "unknown-key-share"],
-      "harness": null,
-      "tests": [],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
       "status": "open-research",
       "next_attack": "Define canonical UCNS transcript serialization and test that every identity/session/capability change changes derived keys and tags."
     },
@@ -125,8 +125,8 @@
       "public_material": ["public gonal vocabulary", "ciphertext angle sequence", "algorithm parameters"],
       "private_material": ["instantiation seed", "private phase", "private vertex permutation", "PCEA keystream position"],
       "known_attacks": ["static gonal frequency analysis", "static gonal known-plaintext recovery", "scalarized keystream reuse", "unresolved 53-to-32 bridge collision/reuse risk"],
-      "harness": "pcea-ucns/gonal_architecture.py",
-      "tests": ["tests/test_gonal_architecture.py"],
+      "harness": "pcea-ucns/gonal_architecture.py; pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_gonal_architecture.py", "tests/test_option_family_specs.py"],
       "status": "open-research",
       "next_attack": "Specify and test the 53-to-32 bridge with chosen-plaintext, known-plaintext, reuse-group, collision-rate, and legitimate-recovery probes before any shipped gonal cipher."
     },
@@ -136,8 +136,8 @@
       "public_material": ["commitment digest", "UCNS commitment object", "context", "algorithm version"],
       "private_material": ["opened value", "nonce", "shared session secret when commitments are transcript-bound"],
       "known_attacks": ["low-entropy brute force", "canonical-equivalence binding failure", "context substitution", "replay of stale commitments"],
-      "harness": null,
-      "tests": [],
+      "harness": "pcea-ucns/option_family_specs.py",
+      "tests": ["tests/test_option_family_specs.py"],
       "status": "open-research",
       "next_attack": "Prototype commit/open transcripts and test binding under UCNS canonical equivalence plus hiding against low-entropy brute force."
     }
