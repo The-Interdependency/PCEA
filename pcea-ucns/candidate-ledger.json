@@ -54,6 +54,17 @@
       "next_attack": "Use the gate to reject product-shaped or set-projection-shaped maps, then write concrete UCNS harnesses for any candidate that has complete attack coverage."
     },
     {
+      "id": "face-payload-spectrum-projection",
+      "claim": "Feed a concrete Option D UCNS map into the gate: compose internally, publish only coarse face/payload/carrier/denominator spectrum data, and require every inverse-family attack before any KEM path.",
+      "public_material": ["base UCNS object", "carrier-support spectrum", "cell-count buckets", "face-parity counts", "payload-depth counts", "denominator buckets", "algorithm parameters"],
+      "private_material": ["secret UCNS object", "exact angle positions", "exact faces", "payload bodies", "future honest bilateral spectrum image"],
+      "known_attacks": ["quotient-compatible lift search", "prefix or normalization readout", "Minkowski set-basis over denominator buckets", "catalogue pruning from spectrum constraints", "finite key-space enumeration", "meet-in-the-middle spectrum collisions", "active malleability", "honest agreement failure", "sublinear or plateauing scaling law"],
+      "harness": "pcea-ucns/option_d_ucns_map.py",
+      "tests": ["tests/test_option_d_ucns_map.py"],
+      "status": "open-research",
+      "next_attack": "Replace the spec-level attack descriptions with executable UCNS harnesses for quotient-compatible lifts, bucketed set-basis recovery, and honest bilateral agreement at toy scale."
+    },
+    {
       "id": "oracle-catalogue-domain",
       "claim": "Small catalogue-complete UCNS domains can hide key material.",
       "public_material": ["UCNS product", "carrier", "catalogue-bounded parameters"],
