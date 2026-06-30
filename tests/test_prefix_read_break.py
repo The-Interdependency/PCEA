@@ -1,3 +1,4 @@
+# ratios: loc_comments=18:7 imports_exports=3:2 calls_definitions=7:2
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the prefix-read structural break.
@@ -32,3 +33,4 @@ def test_flat_objects_are_reconstructed_without_search():
 def test_payload_nesting_does_not_block_the_break():
     r = prb.prefix_read_break(depth=1, trials=60)
     assert r["rate"] > 0.95
+# ratios: loc_comments=18:7 imports_exports=3:2 calls_definitions=7:2

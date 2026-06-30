@@ -1,3 +1,4 @@
+# ratios: loc_comments=113:28 imports_exports=8:3 calls_definitions=26:8
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Factor-count sweep + non-uniqueness diagnosis for PCEA-UCNS.
@@ -168,3 +169,4 @@ if __name__ == "__main__":
         print("ucns not installed; sweep skipped.")
     else:
         print(json.dumps(rep, indent=2))
+# ratios: loc_comments=113:28 imports_exports=8:3 calls_definitions=26:8

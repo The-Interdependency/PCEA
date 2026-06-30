@@ -1,3 +1,4 @@
+# ratios: loc_comments=18:12 imports_exports=3:2 calls_definitions=7:2
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the three-factor positional attack harness.
@@ -37,3 +38,4 @@ def test_recursive_peel_still_recovers_but_not_fully():
     # materially below one. Both bounds matter — neither safe nor trivial.
     r = tfa.three_factor_recovery([8, 5], 3, trials=60)
     assert 0.2 < r["peel_recovery_rate"] < 0.85
+# ratios: loc_comments=18:12 imports_exports=3:2 calls_definitions=7:2

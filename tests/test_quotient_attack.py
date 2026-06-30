@@ -1,3 +1,4 @@
+# ratios: loc_comments=19:11 imports_exports=3:2 calls_definitions=7:2
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the quotient-based attack and key-space reconciliation.
@@ -37,3 +38,4 @@ def test_factor_search_splits_often_leave_keyspace():
     # usable keys — the reconciliation between the two primitives.
     assert r["factor_search_split_outside_keyspace"] > 0
     assert r["quotient_unique_in_keyspace"] > r["trials"] * 0.6
+# ratios: loc_comments=19:11 imports_exports=3:2 calls_definitions=7:2

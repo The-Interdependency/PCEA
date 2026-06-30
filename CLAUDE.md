@@ -191,9 +191,12 @@ assert dec.decrypt(e1) == [seed(99)]
 - `PCEAInstance` auto-advances `last_state` to the plaintext after each
   `encrypt()` / `decrypt()`. Paired encoder/decoder instances must be initialized
   with the same `seed` and process states in the same order to stay synchronized.
-- **Metadata header** — every `*.py` file under `pcea/` and `tests/` must start
-  with the exact line `# GPT/Claude generated; context, prompt Erin Spencer`.
-  `tests/test_metadata_headers.py` enforces this.
+- **Ratios seal + metadata header** — the `# ratios:` bookend is the line-1
+  (and last-line) seal; nothing sits above it. Every `*.py` file under `pcea/`
+  and `tests/` carries the exact provenance line
+  `# GPT/Claude generated; context, prompt Erin Spencer` on **line 2**, directly
+  beneath the seal. `tests/test_metadata_headers.py` enforces both (ratios on
+  line 1, header on line 2).
 - **PCEA↔UCNS contract (Option A)** — PCEA decrypts/inverts via keys, never via
   UCNS inverse/catalogue APIs. `contract.py` holds the canonical constants and the
   list of `FORBIDDEN_UCNS_SYMBOLS`. `tests/test_contract_spec.py` is the release gate.

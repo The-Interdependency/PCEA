@@ -1,3 +1,4 @@
+# ratios: loc_comments=105:30 imports_exports=10:3 calls_definitions=33:6
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Quotient-based attack for PCEA-UCNS — and the key-space reconciliation.
@@ -158,3 +159,4 @@ if __name__ == "__main__":
         print("ucns not installed; quotient attack skipped.")
     else:
         print(json.dumps(rep, indent=2))
+# ratios: loc_comments=105:30 imports_exports=10:3 calls_definitions=33:6

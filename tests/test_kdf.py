@@ -1,3 +1,4 @@
+# ratios: loc_comments=38:2 imports_exports=1:10 calls_definitions=20:10
 # GPT/Claude generated; context, prompt Erin Spencer
 from pcea.kdf import key_stream
 
@@ -58,3 +59,4 @@ def test_length_beyond_one_hash_block():
     result = key_stream([1, 2, 3], 0, 0, 0, 100, 5)
     assert len(result) == 100
     assert all(0 <= d < 5 for d in result)
+# ratios: loc_comments=38:2 imports_exports=1:10 calls_definitions=20:10

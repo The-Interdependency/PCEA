@@ -1,3 +1,4 @@
+# ratios: loc_comments=18:13 imports_exports=3:2 calls_definitions=7:2
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the two-gonal architecture exploration.
@@ -37,3 +38,4 @@ def test_advancing_gonal_resists_and_reader_recovers():
     assert r["known_plaintext_heldout_rate"] < 0.1, r
     # legitimate reader recovers everything
     assert r["legitimate_recovery"] == r["count"], r
+# ratios: loc_comments=18:13 imports_exports=3:2 calls_definitions=7:2

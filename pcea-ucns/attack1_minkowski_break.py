@@ -1,3 +1,4 @@
+# ratios: loc_comments=75:44 imports_exports=9:4 calls_definitions=34:7
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Open Attack 1 resolved: the lossy-projection candidate is BROKEN.
@@ -146,3 +147,4 @@ if __name__ == "__main__":
     rep = run_all()
     print("ucns not installed; Attack 1 skipped." if not rep["available"]
           else json.dumps(rep, indent=2))
+# ratios: loc_comments=75:44 imports_exports=9:4 calls_definitions=34:7

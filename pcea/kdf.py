@@ -1,3 +1,4 @@
+# ratios: loc_comments=18:45 imports_exports=2:1 calls_definitions=5:1
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Hash-based key derivation for PCEA.
@@ -69,3 +70,4 @@ def key_stream(
         raw.extend(hashlib.sha256(payload).digest())
         counter += 1
     return [b % p for b in raw[:length]]
+# ratios: loc_comments=18:45 imports_exports=2:1 calls_definitions=5:1

@@ -1,3 +1,4 @@
+# ratios: loc_comments=61:2 imports_exports=3:5 calls_definitions=11:6
 # GPT/Claude generated; context, prompt Erin Spencer
 """Tests for the Option D UCNS one-way-map candidate gate."""
 
@@ -83,3 +84,4 @@ def test_required_attack_set_names_the_current_option_d_obstructions() -> None:
         "honest_correctness_at_scale",
         "scaling_law",
     }
+# ratios: loc_comments=61:2 imports_exports=3:5 calls_definitions=11:6

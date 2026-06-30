@@ -1,3 +1,4 @@
+# ratios: loc_comments=56:6 imports_exports=3:4 calls_definitions=17:5
 # GPT/Claude generated; context, prompt Erin Spencer
 """Validate the UCNS proving-ground candidate ledger.
 
@@ -78,3 +79,4 @@ def test_broken_or_forbidden_candidates_stay_out_of_shipping_language() -> None:
             ).lower()
             assert "ship" not in combined
             assert "recommended" not in combined
+# ratios: loc_comments=56:6 imports_exports=3:4 calls_definitions=17:5

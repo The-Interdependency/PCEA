@@ -1,3 +1,4 @@
+# ratios: loc_comments=35:2 imports_exports=4:4 calls_definitions=11:4
 # GPT/Claude generated; context, prompt Erin Spencer
 """Tests for concrete non-Option-D UCNS/PCEA evolution specs."""
 
@@ -49,3 +50,4 @@ def test_option_specs_are_registered_in_ledger() -> None:
         assert spec_id in candidates
         assert "pcea-ucns/option_family_specs.py" in candidates[spec_id]["harness"]
         assert "tests/test_option_family_specs.py" in candidates[spec_id]["tests"]
+# ratios: loc_comments=35:2 imports_exports=4:4 calls_definitions=11:4

@@ -1,3 +1,4 @@
+# ratios: loc_comments=88:7 imports_exports=4:15 calls_definitions=57:17
 # GPT/Claude generated; context, prompt Erin Spencer
 import pytest
 
@@ -129,3 +130,4 @@ def test_encrypt_state_seed_idx_varies():
     encrypted = encrypt_state(state, last)
     # Same seed values at different positions should encrypt differently
     assert encrypted[0] != encrypted[1]
+# ratios: loc_comments=88:7 imports_exports=4:15 calls_definitions=57:17

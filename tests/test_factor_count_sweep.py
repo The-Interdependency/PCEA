@@ -1,3 +1,4 @@
+# ratios: loc_comments=19:11 imports_exports=3:2 calls_definitions=7:2
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the factor-count sweep and non-uniqueness diagnosis.
@@ -37,3 +38,4 @@ def test_product_has_many_ordered_factorizations():
     # product is massively non-unique. This is the structural barrier.
     assert r["true_split"] <= r["recompose"] * 0.1
     assert r["other_split"] >= r["recompose"] * 0.9
+# ratios: loc_comments=19:11 imports_exports=3:2 calls_definitions=7:2

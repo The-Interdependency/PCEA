@@ -1,3 +1,4 @@
+# ratios: loc_comments=78:35 imports_exports=8:2 calls_definitions=28:6
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Prefix-read structural break for the UCNS-KEM regime.
@@ -136,3 +137,4 @@ if __name__ == "__main__":
         print("ucns not installed; prefix-read break skipped.")
     else:
         print(json.dumps(rep, indent=2))
+# ratios: loc_comments=78:35 imports_exports=8:2 calls_definitions=28:6

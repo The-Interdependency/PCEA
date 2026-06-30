@@ -1,3 +1,4 @@
+# ratios: loc_comments=23:15 imports_exports=2:3 calls_definitions=12:3
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the UCNS attack harness.
@@ -47,3 +48,4 @@ def test_pruning_eliminates_substantial_search_space():
     # Pruning is an attacker accelerator: it removes a large fraction of
     # the candidate key space at no cost.
     assert r["eliminated_fraction"] > 0.25
+# ratios: loc_comments=23:15 imports_exports=2:3 calls_definitions=12:3

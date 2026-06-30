@@ -1,3 +1,4 @@
+# ratios: loc_comments=98:24 imports_exports=5:3 calls_definitions=23:6
 # GPT/Claude generated; context, prompt Erin Spencer
 """Concrete Option D UCNS map candidate fed into the one-way-map gate.
 
@@ -147,3 +148,4 @@ def gate_result():
     """Return the gate result for the fed candidate."""
 
     return GATE_RESULT
+# ratios: loc_comments=98:24 imports_exports=5:3 calls_definitions=23:6
