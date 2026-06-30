@@ -1,3 +1,4 @@
+# ratios: loc_comments=113:97 imports_exports=8:5 calls_definitions=56:7
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Two-gonal architecture exploration: the energy-to-token quantizer, and why
@@ -243,3 +244,4 @@ def run_all() -> dict:
 if __name__ == "__main__":
     import json
     print(json.dumps(run_all(), indent=2))
+# ratios: loc_comments=113:97 imports_exports=8:5 calls_definitions=56:7

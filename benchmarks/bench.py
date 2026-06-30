@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# ratios: loc_comments=145:41 imports_exports=11:8 calls_definitions=81:11
 """
 PCEA performance benchmark.
 
@@ -254,3 +254,4 @@ if __name__ == "__main__":
     print(f"\n{'─' * 80}")
     print("  Done.")
     print(f"{'─' * 80}\n")
+# ratios: loc_comments=145:41 imports_exports=11:8 calls_definitions=81:11

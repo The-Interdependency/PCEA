@@ -1,3 +1,4 @@
+# ratios: loc_comments=67:7 imports_exports=2:16 calls_definitions=28:16
 # GPT/Claude generated; context, prompt Erin Spencer
 import pytest
 
@@ -108,3 +109,4 @@ def test_roundtrip_small_word_bits():
         k = digit_count(p, W)
         for u in range(0, 256, 13):
             assert from_fixed(to_fixed(u, p, k), p) == u
+# ratios: loc_comments=67:7 imports_exports=2:16 calls_definitions=28:16

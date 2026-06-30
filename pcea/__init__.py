@@ -1,3 +1,4 @@
+# ratios: loc_comments=35:32 imports_exports=6:1 calls_definitions=12:0
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 pcea — Prime Circular Encryption Algorithm.
@@ -77,4 +78,4 @@ __all__ = [
     "CONTRACT_DECISION",
     "contract_statement",
 ]
-
+# ratios: loc_comments=35:32 imports_exports=6:1 calls_definitions=12:0

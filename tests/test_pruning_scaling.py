@@ -1,3 +1,4 @@
+# ratios: loc_comments=20:13 imports_exports=3:2 calls_definitions=8:2
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the quotient-guided pruning scaling result.
@@ -40,3 +41,4 @@ def test_strong_prune_attack_is_not_polynomial_break():
     # The cipher's own carrier-support pruning, turned adversarial, still
     # does not shrink the search below linear.
     assert r["slope"] > 0.8
+# ratios: loc_comments=20:13 imports_exports=3:2 calls_definitions=8:2

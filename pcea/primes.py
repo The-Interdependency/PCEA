@@ -1,3 +1,4 @@
+# ratios: loc_comments=14:28 imports_exports=1:1 calls_definitions=5:2
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Prime circle for PCEA.
@@ -49,3 +50,4 @@ PRIME_CIRCLE: tuple[int, ...] = tuple(_sieve(1000)[:CIRCLE_SIZE])
 def prime_at(index: int) -> int:
     """Return the prime at circular position index (wraps at CIRCLE_SIZE)."""
     return PRIME_CIRCLE[index % CIRCLE_SIZE]
+# ratios: loc_comments=14:28 imports_exports=1:1 calls_definitions=5:2

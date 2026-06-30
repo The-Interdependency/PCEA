@@ -1,3 +1,4 @@
+# ratios: loc_comments=27:44 imports_exports=1:5 calls_definitions=8:5
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Möbius disk codec for PCEA.
@@ -85,3 +86,4 @@ def from_fixed(digits: list[int], p: int) -> int:
         result += d * power
         power *= p
     return result
+# ratios: loc_comments=27:44 imports_exports=1:5 calls_definitions=8:5

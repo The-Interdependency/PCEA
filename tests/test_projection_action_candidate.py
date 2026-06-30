@@ -1,3 +1,4 @@
+# ratios: loc_comments=22:9 imports_exports=3:3 calls_definitions=8:3
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Tests for the projection-action candidate.
@@ -40,3 +41,4 @@ def test_quotient_does_not_invert_projected_action():
 def test_honest_parties_agree():
     r = pac.honest_agreement([8, 5, 3, 7], width=3, trials=120)
     assert r["rate"] == 1.0
+# ratios: loc_comments=22:9 imports_exports=3:3 calls_definitions=8:3

@@ -1,3 +1,4 @@
+# ratios: loc_comments=29:26 imports_exports=1:1 calls_definitions=0:1
 # GPT/Claude generated; context, prompt Erin Spencer
 """PCEA↔UCNS interface-contract constants and guardrails.
 
@@ -62,3 +63,4 @@ def contract_statement() -> str:
         "PCEA decrypts/inverts via keys (Option A), never via UCNS inverse APIs. "
         + SECURITY_INVARIANT
     )
+# ratios: loc_comments=29:26 imports_exports=1:1 calls_definitions=0:1

@@ -1,3 +1,4 @@
+# ratios: loc_comments=69:35 imports_exports=10:4 calls_definitions=18:5
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 UCNS factorization attack harness for PCEA-UCNS domain design.
@@ -125,3 +126,4 @@ if __name__ == "__main__":
         print("ucns not installed; attack harness skipped.")
     else:
         print(json.dumps(report, indent=2, default=lambda s: sorted(s)))
+# ratios: loc_comments=69:35 imports_exports=10:4 calls_definitions=18:5

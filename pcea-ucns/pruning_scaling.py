@@ -1,3 +1,4 @@
+# ratios: loc_comments=114:29 imports_exports=11:3 calls_definitions=52:7
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Quotient-guided pruning scaling test — the break attempt, and its result.
@@ -174,3 +175,4 @@ if __name__ == "__main__":
             print(f"{k}: cost ~ |KS|^{rep[k]['slope']:.2f}")
             for n, m in rep[k]["data"]:
                 print(f"  |KS|={n:5d}  checks={m:6.1f}  ratio={m/n:.3f}")
+# ratios: loc_comments=114:29 imports_exports=11:3 calls_definitions=52:7

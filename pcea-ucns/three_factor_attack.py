@@ -1,3 +1,4 @@
+# ratios: loc_comments=82:29 imports_exports=8:2 calls_definitions=24:5
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Three-factor positional attack for PCEA-UCNS.
@@ -132,3 +133,4 @@ if __name__ == "__main__":
         print("ucns not installed; three-factor harness skipped.")
     else:
         print(json.dumps(rep, indent=2))
+# ratios: loc_comments=82:29 imports_exports=8:2 calls_definitions=24:5

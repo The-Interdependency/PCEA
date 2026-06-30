@@ -1,3 +1,4 @@
+# ratios: loc_comments=68:26 imports_exports=8:2 calls_definitions=18:4
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Positional attack harness for PCEA-UCNS Q1.
@@ -112,3 +113,4 @@ if __name__ == "__main__":
         print("ucns not installed; positional harness skipped.")
     else:
         print(json.dumps(rep, indent=2))
+# ratios: loc_comments=68:26 imports_exports=8:2 calls_definitions=18:4

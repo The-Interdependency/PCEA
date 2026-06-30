@@ -1,3 +1,4 @@
+# ratios: loc_comments=71:11 imports_exports=6:6 calls_definitions=28:8
 # GPT/Claude generated; context, prompt Erin Spencer
 """Contract-level tests for the PCEA↔UCNS boundary assumptions.
 
@@ -105,3 +106,4 @@ def test_forward_roundtrip_is_self_sufficient(word_bits: int) -> None:
     last = [_seed(1), _seed(2), _seed(3)]
     encrypted = encrypt_state(state, last, word_bits=word_bits)
     assert decrypt_state(encrypted, last, word_bits=word_bits) == state
+# ratios: loc_comments=71:11 imports_exports=6:6 calls_definitions=28:8

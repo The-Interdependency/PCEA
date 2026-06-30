@@ -1,3 +1,4 @@
+# ratios: loc_comments=27:1 imports_exports=1:9 calls_definitions=8:10
 # GPT/Claude generated; context, prompt Erin Spencer
 from pcea.primes import CIRCLE_SIZE, PRIME_CIRCLE, prime_at
 
@@ -46,3 +47,4 @@ def test_prime_at_large_index():
 
 def test_prime_at_first():
     assert prime_at(0) == 2
+# ratios: loc_comments=27:1 imports_exports=1:9 calls_definitions=8:10

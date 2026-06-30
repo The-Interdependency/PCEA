@@ -1,3 +1,4 @@
+# ratios: loc_comments=75:57 imports_exports=10:5 calls_definitions=33:10
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Candidate one-way UCNS action via lossy set-projection — and its open attacks.
@@ -167,3 +168,4 @@ if __name__ == "__main__":
     rep = run_all()
     print("ucns not installed; candidate probe skipped." if not rep["available"]
           else json.dumps(rep, indent=2))
+# ratios: loc_comments=75:57 imports_exports=10:5 calls_definitions=33:10

@@ -1,3 +1,4 @@
+# ratios: loc_comments=60:19 imports_exports=3:3 calls_definitions=20:4
 # GPT/Claude generated; context, prompt Erin Spencer
 """Option D gate for UCNS-native one-way-map candidates.
 
@@ -100,3 +101,4 @@ def is_ready_for_happy_path(candidate: Mapping[str, object]) -> bool:
     """True only when the candidate has a complete attack agenda and no claims."""
 
     return evaluate_candidate(candidate).ok
+# ratios: loc_comments=60:19 imports_exports=3:3 calls_definitions=20:4

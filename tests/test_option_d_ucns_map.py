@@ -1,3 +1,4 @@
+# ratios: loc_comments=55:2 imports_exports=5:5 calls_definitions=21:5
 # GPT/Claude generated; context, prompt Erin Spencer
 """Tests for the concrete Option D UCNS map candidate fed into the gate."""
 
@@ -77,3 +78,4 @@ def test_spectrum_projection_publishes_only_coarse_ucns_features() -> None:
     }
     assert "A_plus" not in projection
     assert "faces" not in projection
+# ratios: loc_comments=55:2 imports_exports=5:5 calls_definitions=21:5

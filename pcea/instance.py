@@ -1,3 +1,4 @@
+# ratios: loc_comments=30:44 imports_exports=3:1 calls_definitions=12:6
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Stateful PCEA instance.
@@ -89,3 +90,4 @@ class PCEAInstance:
     def last_state(self) -> State:
         """Read-only snapshot of the current last_state."""
         return copy.deepcopy(self._last)
+# ratios: loc_comments=30:44 imports_exports=3:1 calls_definitions=12:6

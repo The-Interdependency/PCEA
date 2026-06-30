@@ -1,3 +1,4 @@
+# ratios: loc_comments=77:3 imports_exports=2:13 calls_definitions=50:16
 # GPT/Claude generated; context, prompt Erin Spencer
 import pytest
 
@@ -111,3 +112,4 @@ def test_last_state_unchanged_after_empty_encrypt():
     inst = PCEAInstance(init)
     inst.encrypt([])
     assert inst.last_state == init
+# ratios: loc_comments=77:3 imports_exports=2:13 calls_definitions=50:16

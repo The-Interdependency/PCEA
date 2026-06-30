@@ -1,3 +1,4 @@
+# ratios: loc_comments=161:11 imports_exports=3:3 calls_definitions=9:3
 # GPT/Claude generated; context, prompt Erin Spencer
 """Concrete candidate specs for the non-Option-D UCNS/PCEA evolution paths.
 
@@ -185,3 +186,4 @@ def spec_ids() -> set[str]:
     """Return ids for the non-D options currently fed into the spec gate."""
 
     return set(OPTION_FAMILY_SPECS)
+# ratios: loc_comments=161:11 imports_exports=3:3 calls_definitions=9:3

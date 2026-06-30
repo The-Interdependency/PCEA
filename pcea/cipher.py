@@ -1,3 +1,4 @@
+# ratios: loc_comments=96:57 imports_exports=4:4 calls_definitions=35:8
 # GPT/Claude generated; context, prompt Erin Spencer
 """
 Prime-circular Möbius disk cipher.
@@ -178,3 +179,4 @@ def decrypt_state(
     if len(encrypted) != len(last_state):
         raise ValueError("encrypted and last_state must contain the same number of seeds")
     return [decrypt_seed(encrypted[i], last_state[i], i, word_bits) for i in range(len(encrypted))]
+# ratios: loc_comments=96:57 imports_exports=4:4 calls_definitions=35:8
